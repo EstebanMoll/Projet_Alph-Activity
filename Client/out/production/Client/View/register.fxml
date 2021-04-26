@@ -37,30 +37,25 @@
                     </font>
                 </Label>
                 <PasswordField fx:id="enterPasswordField" layoutX="126.0" layoutY="188.0" prefHeight="26.0" prefWidth="174.0" promptText="Mot de passe" />
-                <Button fx:id="CreateAccountButton" layoutX="43.0" layoutY="454.0" mnemonicParsing="false" onAction="#createAccountButtonPushed" prefHeight="32.0" prefWidth="240.0" style="-fx-border-color: #808080;" text="Créer un compte">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </Button>
-                <Label alignment="CENTER" layoutX="16.0" layoutY="163.0" prefHeight="19.0" prefWidth="287.0" text="Identifiant déjà utilisé." textFill="RED">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </Label>
             <Label layoutX="14.0" layoutY="241.0" prefHeight="46.0" prefWidth="91.0" text="Confirmation mot de passe" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
             <PasswordField fx:id="enterPasswordField1" layoutX="126.0" layoutY="256.0" prefHeight="26.0" prefWidth="174.0" promptText="Confirmation mot de passe" />
-            <DatePicker layoutX="96.0" layoutY="336.0" prefHeight="26.0" prefWidth="128.0" />
+            <Label layoutX="17.0" layoutY="315.0" text="Poids (kg)" />
+            <Spinner fx:id="PoidsSpinner" editable="true" layoutX="12.0" layoutY="336.0" prefHeight="26.0" prefWidth="62.0" />
+                <Label alignment="CENTER" layoutX="16.0" layoutY="163.0" prefHeight="19.0" prefWidth="287.0" text="Identifiant déjà utilisé." textFill="RED">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
             <Label layoutX="105.0" layoutY="300.0" prefHeight="46.0" prefWidth="115.0" text="Date de naissance" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="315.0" text="Poids (kg)" />
-            <Spinner fx:id="PoidsSpinner" editable="true" layoutX="12.0" layoutY="336.0" prefHeight="26.0" prefWidth="62.0" />
+            <DatePicker layoutX="96.0" layoutY="336.0" prefHeight="26.0" prefWidth="128.0" />
             <Label layoutX="251.0" layoutY="312.0" text="Taille (cm)" />
             <Spinner fx:id="TailleSpinner" editable="true" layoutX="247.0" layoutY="333.0" prefHeight="26.0" prefWidth="62.0" />
             <ComboBox fx:id="SexeComboBox" layoutX="21.0" layoutY="398.0" prefHeight="26.0" prefWidth="107.0" promptText="Sexe" />
@@ -77,6 +72,11 @@
                   <Font size="13.0" />
                </font>
             </Label>
+                <Button fx:id="CreateAccountButton" layoutX="43.0" layoutY="454.0" mnemonicParsing="false" onAction="#createAccountButtonPushed" prefHeight="32.0" prefWidth="240.0" style="-fx-border-color: #808080;" text="Créer un compte">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
             <Button fx:id="CancelButton" layoutX="43.0" layoutY="494.0" mnemonicParsing="false" onAction="#CancelButtonPushed" prefHeight="32.0" prefWidth="240.0" style="-fx-border-color: #808080;" text="Annuler">
                <font>
                   <Font size="13.0" />
