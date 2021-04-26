@@ -25,11 +25,6 @@
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <Button fx:id="addButton" layoutX="40.0" layoutY="418.0" mnemonicParsing="false" onAction="#addButtonPushed" prefHeight="32.0" prefWidth="240.0" style="-fx-border-color: #808080;" text="Ajouter">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </Button>
             <Label alignment="CENTER" layoutX="2.0" layoutY="39.0" prefHeight="18.0" prefWidth="316.0" text="Ajouter une activité">
                <font>
                   <Font size="25.0" />
@@ -43,8 +38,8 @@
                </font>
             </Label>
             <Spinner fx:id="HeureSpinner" layoutX="131.0" layoutY="257.0" prefHeight="26.0" prefWidth="55.0" />
-            <Spinner fx:id="SecondeSpinner" layoutX="264.0" layoutY="257.0" prefHeight="26.0" prefWidth="55.0" />
             <Spinner fx:id="MinuteSpinner" layoutX="198.0" layoutY="257.0" prefHeight="26.0" prefWidth="55.0" />
+            <Spinner fx:id="SecondeSpinner" layoutX="264.0" layoutY="257.0" prefHeight="26.0" prefWidth="55.0" />
             <Label alignment="CENTER" layoutX="131.0" layoutY="237.0" prefWidth="55.0" text="Heure">
                <font>
                   <Font size="13.0" />
@@ -60,6 +55,11 @@
                   <Font size="13.0" />
                </font>
             </Label>
+                <Button fx:id="addButton" layoutX="40.0" layoutY="418.0" mnemonicParsing="false" onAction="#addButtonPushed" prefHeight="32.0" prefWidth="240.0" style="-fx-border-color: #808080;" text="Ajouter">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
             <Button fx:id="cancelButton" layoutX="40.0" layoutY="463.0" mnemonicParsing="false" onAction="#cancelButtonPushed" prefHeight="32.0" prefWidth="240.0" style="-fx-border-color: #808080;" text="Annuler">
                <font>
                   <Font size="13.0" />

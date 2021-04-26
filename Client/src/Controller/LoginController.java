@@ -44,7 +44,6 @@ public class LoginController {
              * Voir pour l'envoie de données à la bd
              */
             String pwdHash = hash256(pwdField);
-            System.out.println(pwdHash);
             Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
             Scene homeScene = new Scene(homeParent);
             homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
