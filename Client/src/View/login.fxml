@@ -52,6 +52,11 @@
                   <Font size="13.0" />
                </font>
             </Label>
+            <Label fx:id="networkError" alignment="CENTER" layoutX="19.0" layoutY="121.0" prefHeight="47.0" prefWidth="287.0" text="Une erreur est survenue, veuillez réessayer dans quelques instants." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

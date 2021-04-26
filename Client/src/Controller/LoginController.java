@@ -25,6 +25,7 @@ public class LoginController {
     @FXML private PasswordField pwdField;
     @FXML private Label labelEmpty;
     @FXML private Label errorLogin;
+    @FXML private Label networkError;
 
     public void registerHyperlinkPushed(ActionEvent event) throws IOException
     {
@@ -45,23 +46,27 @@ public class LoginController {
         else {
             String pwdHash = hash256(pwdField);
 
-            if (AlphActivity.client.connect() && AlphActivity.client.login(usernameTextField.getText(), pwdHash))
-            {
-                Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
-                Scene homeScene = new Scene(homeParent);
-                homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
+            if (AlphActivity.client.connect()) {
+                networkError.setVisible(false);
+                if (AlphActivity.client.login(usernameTextField.getText(), pwdHash)) {
+                    Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
+                    Scene homeScene = new Scene(homeParent);
+                    homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
 
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                window.setResizable(true);
+                    window.setResizable(true);
 
-                window.setScene(homeScene);
-                window.setFullScreen(true);
-                window.show();
+                    window.setScene(homeScene);
+                    window.setFullScreen(true);
+                    window.show();
+                } else {
+                    AlphActivity.client.disconnect();
+                    errorLogin.setVisible(true);
+                }
             }
             else {
-                AlphActivity.client.disconnect();
-                errorLogin.setVisible(true);
+                networkError.setVisible(true);
             }
         }
     }

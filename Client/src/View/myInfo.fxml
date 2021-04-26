@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,48 +19,51 @@
     <center>
         <AnchorPane prefHeight="400.0" prefWidth="227.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="107.0" fitWidth="180.0" layoutX="73.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="63.0" fitWidth="122.0" layoutX="107.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../ressources/Logo_sansBackground.png" />
                     </image>
                 </ImageView>
-            <Label layoutX="12.0" layoutY="123.0" prefHeight="46.0" prefWidth="91.0" text="Ancien mot de passe" wrapText="true">
+            <Label layoutX="12.0" layoutY="69.0" prefHeight="46.0" prefWidth="91.0" text="Ancien mot de passe" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <PasswordField fx:id="oldPwd" layoutX="126.0" layoutY="133.0" prefHeight="26.0" prefWidth="174.0" promptText="Ancien mot de passe" />
-                <Label layoutX="12.0" layoutY="196.0" prefHeight="46.0" prefWidth="91.0" text="Nouveau mot de passe" wrapText="true">
+            <PasswordField fx:id="oldPwd" layoutX="126.0" layoutY="79.0" prefHeight="26.0" prefWidth="174.0" promptText="Ancien mot de passe" />
+                <Label layoutX="12.0" layoutY="142.0" prefHeight="46.0" prefWidth="91.0" text="Nouveau mot de passe" wrapText="true">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <PasswordField fx:id="newPwd" layoutX="126.0" layoutY="206.0" prefHeight="26.0" prefWidth="174.0" promptText="Nouveau mot de passe" />
-                <Label layoutX="14.0" layoutY="272.0" prefHeight="46.0" prefWidth="91.0" text="Confirmation mot de passe" wrapText="true">
+                <PasswordField fx:id="newPwd" layoutX="126.0" layoutY="152.0" prefHeight="26.0" prefWidth="174.0" promptText="Nouveau mot de passe" />
+                <Label layoutX="14.0" layoutY="218.0" prefHeight="46.0" prefWidth="91.0" text="Confirmation mot de passe" wrapText="true">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <PasswordField fx:id="confirmPwd" layoutX="126.0" layoutY="287.0" prefHeight="26.0" prefWidth="174.0" promptText="Confirmation mot de passe" />
-                <Label layoutX="70.0" layoutY="338.0" text="Poids (kg)" />
-                <Spinner fx:id="PoidsSpinner" editable="true" layoutX="65.0" layoutY="359.0" prefHeight="26.0" prefWidth="62.0" />
-                <Label layoutX="195.0" layoutY="335.0" text="Taille (cm)" />
-                <Spinner fx:id="TailleSpinner" editable="true" layoutX="191.0" layoutY="356.0" prefHeight="26.0" prefWidth="62.0" />
+                <PasswordField fx:id="confirmPwd" layoutX="126.0" layoutY="233.0" prefHeight="26.0" prefWidth="174.0" promptText="Confirmation mot de passe" />
+            <TextField fx:id="textContry" layoutX="12.0" layoutY="296.0" prefWidth="130.0" promptText="Pays" />
+            <TextField fx:id="textRegion" layoutX="177.6" layoutY="296.0" prefWidth="130.0" promptText="Région" AnchorPane.rightAnchor="12.0" />
+            <TextField fx:id="textCity" layoutX="94.0" layoutY="327.0" prefWidth="130.0" promptText="Ville" />
+                <Label layoutX="70.0" layoutY="356.0" text="Poids (kg)" />
+                <Spinner fx:id="PoidsSpinner" editable="true" layoutX="65.0" layoutY="377.0" prefHeight="26.0" prefWidth="62.0" />
+                <Label layoutX="195.0" layoutY="353.0" text="Taille (cm)" />
+                <Spinner fx:id="TailleSpinner" editable="true" layoutX="191.0" layoutY="374.0" prefHeight="26.0" prefWidth="62.0" />
                 <ComboBox fx:id="SexeComboBox" layoutX="21.0" layoutY="421.0" prefHeight="26.0" prefWidth="107.0" promptText="Sexe" />
                 <Label layoutX="61.0" layoutY="403.0" text="Sexe" />
                 <ComboBox fx:id="NiveauComboBox" layoutX="191.0" layoutY="421.0" prefHeight="26.0" prefWidth="107.0" promptText="Niveau" />
                 <Label layoutX="227.0" layoutY="403.0" text="Niveau" />
-                <Label alignment="CENTER" layoutX="16.0" layoutY="238.0" prefHeight="40.0" prefWidth="287.0" text="Le mot de passe doit contenir 7 caractères dont une majuscule, une minuscule et un chiffre." textAlignment="CENTER" textFill="RED" wrapText="true">
+                <Label alignment="CENTER" layoutX="16.0" layoutY="184.0" prefHeight="40.0" prefWidth="287.0" text="Le mot de passe doit contenir 7 caractères dont une majuscule, une minuscule et un chiffre." textAlignment="CENTER" textFill="RED" wrapText="true">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="16.0" layoutY="316.0" prefHeight="19.0" prefWidth="287.0" text="Les mots de passes sont différents." textFill="RED">
+                <Label alignment="CENTER" layoutX="16.0" layoutY="262.0" prefHeight="19.0" prefWidth="287.0" text="Les mots de passes sont différents." textFill="RED">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-            <Label alignment="CENTER" layoutX="19.0" layoutY="161.0" prefHeight="40.0" prefWidth="287.0" text="Mauvais mot de passe." textAlignment="CENTER" textFill="RED" wrapText="true">
+            <Label alignment="CENTER" layoutX="19.0" layoutY="107.0" prefHeight="40.0" prefWidth="287.0" text="Mauvais mot de passe." textAlignment="CENTER" textFill="RED" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>
@@ -74,6 +78,9 @@
                   <Font size="13.0" />
                </font>
             </Button>
+            <Label layoutX="64.0" layoutY="278.0" text="Pays" />
+            <Label layoutX="231.0" layoutY="278.0" text="Région" />
+            <Label layoutX="148.0" layoutY="309.0" text="Ville" />
             </children>
         </AnchorPane>
     </center>
