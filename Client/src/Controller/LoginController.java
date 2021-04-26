@@ -1,5 +1,7 @@
 package Controller;
 
+import App.AlphActivity;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ public class LoginController {
     @FXML private TextField usernameTextField;
     @FXML private PasswordField pwdField;
     @FXML private Label labelEmpty;
+    @FXML private Label errorLogin;
 
     public void registerHyperlinkPushed(ActionEvent event) throws IOException
     {
@@ -40,21 +43,29 @@ public class LoginController {
             labelEmpty.setVisible(true);
         }
         else {
-            /**
-             * Voir pour l'envoie de données à la bd(envoi login et mot de passe et retour booleen)
-             */
             String pwdHash = hash256(pwdField);
-            Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
-            Scene homeScene = new Scene(homeParent);
-            homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
 
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            /**
+             * Model fonction login
+             */
+            if(AlphActivity.client.login(usernameTextField.getText(), pwdHash))
+            {
+                Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
+                Scene homeScene = new Scene(homeParent);
+                homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
 
-            window.setResizable(true);
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(homeScene);
-            window.setFullScreen(true);
-            window.show();
+                window.setResizable(true);
+
+                window.setScene(homeScene);
+                window.setFullScreen(true);
+                window.show();
+            }
+            else
+            {
+                errorLogin.setVisible(true);
+            }
         }
     }
 

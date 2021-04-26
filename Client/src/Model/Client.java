@@ -1,5 +1,5 @@
-package Model;
-
+package Model
+;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -66,5 +66,13 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean login(String username, String psw)
+    {
+        /**
+         * Mettre la logique coté serveur
+         */
+        return true;
     }
 }
