@@ -96,4 +96,23 @@ public class Client {
     {
         return true;
     }
+
+    /**
+     * Creation d'un compte utilisateur
+     * @param username String nom de l'utilisateur
+     * @param pwd String mot de passe hashé de l'utilisateur
+     * @param country String pays
+     * @param region String region
+     * @param city String ville
+     * @param weight Float poids
+     * @param birthdate String date de naissance
+     * @param size Float taille
+     * @param sexe String sexe
+     * @param level String niveau
+     * @return true si création OK sinon false
+     */
+    public boolean createAccount(String username, String pwd, String country, String region, String city, float weight, String birthdate, float size, String sexe, String level)
+    {
+        return true;
+    }
 }

@@ -42,13 +42,13 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <PasswordField fx:id="enterPasswordField1" layoutX="126.0" layoutY="208.0" prefHeight="26.0" prefWidth="174.0" promptText="Confirmation mot de passe" />
+            <PasswordField fx:id="confirmPasswordField" layoutX="126.0" layoutY="208.0" prefHeight="26.0" prefWidth="174.0" promptText="Confirmation mot de passe" />
             <TextField fx:id="textCountry" layoutX="14.0" layoutY="280.0" prefHeight="26.0" prefWidth="130.0" promptText="Pays" />
             <TextField fx:id="textRegion" layoutX="176.0" layoutY="280.0" prefHeight="26.0" prefWidth="130.0" promptText="Région" />
             <TextField fx:id="textCity" layoutX="94.0" layoutY="326.0" prefHeight="26.0" prefWidth="130.0" promptText="Ville" />
             <Label layoutX="17.0" layoutY="351.0" text="Poids (kg)" />
             <Spinner fx:id="PoidsSpinner" editable="true" layoutX="12.0" layoutY="372.0" prefHeight="26.0" prefWidth="62.0" />
-                <Label alignment="CENTER" layoutX="16.0" layoutY="115.0" prefHeight="19.0" prefWidth="287.0" text="Identifiant déjà utilisé." textFill="RED">
+                <Label fx:id="errorCreateAccount" alignment="CENTER" layoutX="16.0" layoutY="115.0" prefHeight="19.0" prefWidth="287.0" text="Identifiant déjà utilisé." textFill="RED" visible="false">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -58,7 +58,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <DatePicker layoutX="96.0" layoutY="372.0" prefHeight="26.0" prefWidth="128.0" />
+            <DatePicker fx:id="birthdate" layoutX="96.0" layoutY="372.0" prefHeight="26.0" prefWidth="128.0" />
             <Label layoutX="251.0" layoutY="348.0" text="Taille (cm)" />
             <Spinner fx:id="TailleSpinner" editable="true" layoutX="247.0" layoutY="369.0" prefHeight="26.0" prefWidth="62.0" />
             <ComboBox fx:id="SexeComboBox" layoutX="21.0" layoutY="417.0" prefHeight="26.0" prefWidth="107.0" promptText="Sexe" />
@@ -88,6 +88,11 @@
             <Label layoutX="65.0" layoutY="261.0" text="Pays" />
             <Label layoutX="227.0" layoutY="261.0" text="Région" />
             <Label layoutX="145.0" layoutY="307.0" text="Ville" />
+            <Label fx:id="errorNetwork" alignment="CENTER" layoutX="16.0" layoutY="165.0" prefHeight="40.0" prefWidth="287.0" text="Une erreur est survenue, veuillez réessayer dans quelques instants." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </center>

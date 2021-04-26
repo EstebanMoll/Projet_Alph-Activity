@@ -1,40 +1,55 @@
 package Controller;
 
+import App.AlphActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class RegisterController {
 
     @FXML private Spinner PoidsSpinner;
-
     @FXML private Spinner TailleSpinner;
-
     @FXML private ComboBox SexeComboBox;
-
     @FXML private ComboBox NiveauComboBox;
-
-    @FXML private Button CreateAccountButton;
+    @FXML private Label errorNetwork;
+    @FXML private TextField usernameTextField;
+    @FXML private PasswordField enterPasswordField;
+    @FXML private TextField textCountry;
+    @FXML private TextField textRegion;
+    @FXML private TextField textCity;
+    @FXML private DatePicker birthdate;
+    @FXML private Label errorCreateAccount;
 
     public void createAccountButtonPushed(ActionEvent event) throws IOException
     {
-        Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
-        Scene loginScene = new Scene(loginParent);
+        if(AlphActivity.client.connect())
+        {
+            if(AlphActivity.client.createAccount(usernameTextField.getText(), enterPasswordField.getText(), textCountry.getText(), textRegion.getText(), textCity.getText(), (int)PoidsSpinner.getValue(), birthdate.getValue().toString(), (int)TailleSpinner.getValue(), SexeComboBox.getValue().toString(), NiveauComboBox.getValue().toString())) {
+                Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
+                Scene loginScene = new Scene(loginParent);
 
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(loginScene);
-        window.show();
+                window.setScene(loginScene);
+                window.show();
+            }
+            else
+            {
+                errorCreateAccount.setVisible(true);
+            }
+        }
+        else
+        {
+            errorNetwork.setVisible(true);
+        }
     }
 
     @FXML
@@ -49,6 +64,7 @@ public class RegisterController {
         this.SexeComboBox.getItems().addAll("Homme", "Femme", "Autre");
 
         this.NiveauComboBox.getItems().addAll("Débutant", "Intermédiaire", "Confirmé", "Expert", "Alpha");
+        this.birthdate.setValue(LocalDate.now().minusYears(18));
     }
 
     public void CancelButtonPushed(ActionEvent event) throws IOException
