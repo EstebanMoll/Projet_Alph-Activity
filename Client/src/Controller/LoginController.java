@@ -45,10 +45,7 @@ public class LoginController {
         else {
             String pwdHash = hash256(pwdField);
 
-            /**
-             * Model fonction login
-             */
-            if(AlphActivity.client.login(usernameTextField.getText(), pwdHash))
+            if (AlphActivity.client.connect() && AlphActivity.client.login(usernameTextField.getText(), pwdHash))
             {
                 Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
                 Scene homeScene = new Scene(homeParent);
@@ -62,12 +59,13 @@ public class LoginController {
                 window.setFullScreen(true);
                 window.show();
             }
-            else
-            {
+            else {
+                AlphActivity.client.disconnect();
                 errorLogin.setVisible(true);
             }
         }
     }
+
 
     private boolean isEmpty(TextField tf)
     {

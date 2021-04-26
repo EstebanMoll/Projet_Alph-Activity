@@ -68,11 +68,32 @@ public class Client {
         }
     }
 
+    /**
+     * Fonction pour se connecter à l'application
+     * @param username String nom de l'utilisateur
+     * @param psw String mot de passe hashé de l'utilisateur
+     * @return true si login Ok sinon false
+     */
     public boolean login(String username, String psw)
     {
-        /**
-         * Mettre la logique coté serveur
-         */
+        return true;
+    }
+
+    /**
+     * Connexion au serveur
+     * @return true si connexion sinon false
+     */
+    public boolean connect()
+    {
+        return true;
+    }
+
+    /**
+     * Deconnexion au serveur
+     * @return true si la déconnexion OK sinon false
+     */
+    public boolean disconnect()
+    {
         return true;
     }
 }
