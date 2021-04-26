@@ -41,7 +41,7 @@ public class LoginController {
         }
         else {
             /**
-             * Voir pour l'envoie de données à la bd
+             * Voir pour l'envoie de données à la bd(envoi login et mot de passe et retour booleen)
              */
             String pwdHash = hash256(pwdField);
             Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));

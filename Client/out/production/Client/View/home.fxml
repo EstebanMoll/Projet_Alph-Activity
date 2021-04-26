@@ -60,22 +60,22 @@
                <children>
                   <TabPane layoutX="86.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray; -fx-border-radius: 10;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="45.0">
                     <tabs>
-                      <Tab text="Statistiques">
+                      <Tab fx:id="historyTab" text="Historique">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </Tab>
-                      <Tab text="Classement">
+                      <Tab fx:id="statTab" text="Statistiques">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </Tab>
-                        <Tab text="Classement">
+                        <Tab fx:id="lastTrainingTab" text="Dernier entraînement">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                            </content>
                         </Tab>
-                        <Tab text="Classement">
+                        <Tab fx:id="rankTab" text="Classement">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                            </content>

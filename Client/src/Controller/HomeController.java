@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -20,6 +21,10 @@ public class HomeController {
     @FXML private RadioButton radio2;
     @FXML private RadioButton radio3;
     @FXML private RadioButton radio4;
+    @FXML private Tab historyTab;
+    @FXML private Tab statTab;
+    @FXML private Tab lastTrainingTab;
+    @FXML private Tab rankTab;
 
     public void addActivityButtonPushed(ActionEvent event) throws IOException
     {
@@ -63,6 +68,11 @@ public class HomeController {
         radio2.setToggleGroup(toggleGroup);
         radio3.setToggleGroup(toggleGroup);
         radio4.setToggleGroup(toggleGroup);
+
+    }
+
+    public void radio1Pushed(ActionEvent event)
+    {
 
     }
 }
