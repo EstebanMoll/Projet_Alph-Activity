@@ -52,6 +52,11 @@
             </Label>
             <Hyperlink layoutX="175.0" layoutY="410.0" onAction="#registerHyperlinkPushed" prefHeight="24.0" prefWidth="82.0" text="S'inscrire" />
             <Label layoutX="67.0" layoutY="413.0" prefHeight="18.0" prefWidth="108.0" text="Nouvel utilisateur ?" textFill="#818080" />
+            <Label fx:id="labelEmpty" alignment="CENTER" layoutX="16.0" layoutY="291.0" prefHeight="47.0" prefWidth="287.0" text="Identifiant et mot de passe doivent être renseignés." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
