@@ -50,4 +50,15 @@ public class RegisterController {
 
         this.NiveauComboBox.getItems().addAll("Débutant", "Intermédiaire", "Confirmé", "Expert", "Alpha");
     }
+
+    public void CancelButtonPushed(ActionEvent event) throws IOException
+    {
+        Parent loginParent = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene loginScene = new Scene(loginParent);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(loginScene);
+        window.show();
+    }
 }

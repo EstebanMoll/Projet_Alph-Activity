@@ -26,4 +26,15 @@ public class HomeController {
         window.setScene(activityScene);
         window.show();
     }
+
+    public void myInfoHyperlinkPushed(ActionEvent event) throws IOException
+    {
+        Parent myInfoParent = FXMLLoader.load(getClass().getResource("myInfo.fxml"));
+        Scene myInfoScene = new Scene(myInfoParent);
+
+        Stage window = new Stage();
+
+        window.setScene(myInfoScene);
+        window.show();
+    }
 }
