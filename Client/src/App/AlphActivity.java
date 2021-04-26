@@ -1,4 +1,4 @@
-package sample;
+package App;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,11 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class AlphActivity extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
         primaryStage.setTitle("Alph'Activity");
         Scene scene = new Scene(root, 350, 540);
         primaryStage.setScene(scene);

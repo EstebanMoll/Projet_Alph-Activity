@@ -1,12 +1,10 @@
-package sample;
+package Controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,7 +13,7 @@ public class LoginController {
 
     public void registerHyperlinkPushed(ActionEvent event) throws IOException
     {
-        Parent registerParent = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Parent registerParent = FXMLLoader.load(getClass().getResource("../View/register.fxml"));
         Scene registerScene = new Scene(registerParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -26,9 +24,9 @@ public class LoginController {
 
     public void loginButtonPushed(ActionEvent event) throws IOException
     {
-        Parent homeParent = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
         Scene homeScene = new Scene(homeParent);
-        homeScene.getStylesheets().add(getClass().getResource("home.css").toString());
+        homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 

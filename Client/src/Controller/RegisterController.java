@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +28,7 @@ public class RegisterController {
 
     public void createAccountButtonPushed(ActionEvent event) throws IOException
     {
-        Parent loginParent = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
         Scene loginScene = new Scene(loginParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -53,7 +53,7 @@ public class RegisterController {
 
     public void CancelButtonPushed(ActionEvent event) throws IOException
     {
-        Parent loginParent = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
         Scene loginScene = new Scene(loginParent);
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
