@@ -143,4 +143,31 @@ public class Client {
     {
         return true;
     }
+
+    /**
+     * Modification des données d'un utilisateur
+     * @param pwd String mot de passe hashé
+     * @param country String pays
+     * @param region String région
+     * @param city String ville
+     * @param weight int poids
+     * @param height int taille
+     * @param sexe String sexe
+     * @param level String niveau
+     * @return true si modification OK sinon false
+     */
+    public boolean modifyData(String pwd, String country, String region, String city, int weight, int height, String sexe, String level)
+    {
+        return true;
+    }
+
+    /**
+     * Vérification de l'ancien mot de passe
+     * @param oldPwdHash ancien mot de passe hashé
+     * @return true si comparaison OK sinon false
+     */
+    public boolean checkOldPwd(String oldPwdHash)
+    {
+        return true;
+    }
 }

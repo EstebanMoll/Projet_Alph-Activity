@@ -39,6 +39,7 @@ public class LoginController {
     }
 
     public void loginButtonPushed(ActionEvent event) throws IOException, NoSuchAlgorithmException {
+        labelEmpty.setVisible(false);
         if(isEmpty(usernameTextField) || isEmpty(pwdField))
         {
             labelEmpty.setVisible(true);

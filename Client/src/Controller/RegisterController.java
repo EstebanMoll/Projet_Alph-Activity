@@ -38,6 +38,9 @@ public class RegisterController {
     @FXML private Label errorConfirmPwd;
 
     public void createAccountButtonPushed(ActionEvent event) throws IOException, NoSuchAlgorithmException {
+        errorNetwork.setVisible(false);
+        errorCreateAccount.setVisible(false);
+
         if(checkPwd()) {
             if (AlphActivity.client.connect()) {
 
@@ -92,8 +95,12 @@ public class RegisterController {
 
     private boolean checkPwd()
     {
+        errorConfirmPwd.setVisible(false);
+        errorPwd.setVisible(false);
+
         Pattern p = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{7,}$");
         Matcher m = p.matcher(enterPasswordField.getText());
+
         if(m.matches())
         {
             Pattern confirm = Pattern.compile(enterPasswordField.getText());
