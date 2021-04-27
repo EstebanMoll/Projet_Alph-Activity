@@ -42,7 +42,7 @@
                     </font>
                 </Label>
                 <PasswordField fx:id="confirmPwd" layoutX="126.0" layoutY="233.0" prefHeight="26.0" prefWidth="174.0" promptText="Confirmation mot de passe" />
-            <TextField fx:id="textContry" layoutX="12.0" layoutY="296.0" prefWidth="130.0" promptText="Pays" />
+            <TextField fx:id="textCountry" layoutX="12.0" layoutY="296.0" prefWidth="130.0" promptText="Pays" />
             <TextField fx:id="textRegion" layoutX="177.6" layoutY="296.0" prefWidth="130.0" promptText="Région" AnchorPane.rightAnchor="12.0" />
             <TextField fx:id="textCity" layoutX="94.0" layoutY="327.0" prefWidth="130.0" promptText="Ville" />
                 <Label layoutX="70.0" layoutY="356.0" text="Poids (kg)" />
@@ -53,17 +53,17 @@
                 <Label layoutX="61.0" layoutY="403.0" text="Sexe" />
                 <ComboBox fx:id="NiveauComboBox" layoutX="191.0" layoutY="421.0" prefHeight="26.0" prefWidth="107.0" promptText="Niveau" />
                 <Label layoutX="227.0" layoutY="403.0" text="Niveau" />
-                <Label alignment="CENTER" layoutX="16.0" layoutY="184.0" prefHeight="40.0" prefWidth="287.0" text="Le mot de passe doit contenir 7 caractères dont une majuscule, une minuscule et un chiffre." textAlignment="CENTER" textFill="RED" wrapText="true">
+                <Label fx:id="errorPwd" alignment="CENTER" layoutX="16.0" layoutY="184.0" prefHeight="40.0" prefWidth="287.0" text="Le mot de passe doit contenir 7 caractères dont une majuscule, une minuscule et un chiffre." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="16.0" layoutY="262.0" prefHeight="19.0" prefWidth="287.0" text="Les mots de passes sont différents." textFill="RED">
+                <Label fx:id="errorConfirmPwd" alignment="CENTER" layoutX="16.0" layoutY="262.0" prefHeight="19.0" prefWidth="287.0" text="Les mots de passes sont différents." textFill="RED" visible="false">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-            <Label alignment="CENTER" layoutX="19.0" layoutY="107.0" prefHeight="40.0" prefWidth="287.0" text="Mauvais mot de passe." textAlignment="CENTER" textFill="RED" wrapText="true">
+            <Label fx:id="errorOldPwd" alignment="CENTER" layoutX="19.0" layoutY="107.0" prefHeight="15.0" prefWidth="287.0" text="Mauvais mot de passe." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>
@@ -81,6 +81,11 @@
             <Label layoutX="64.0" layoutY="278.0" text="Pays" />
             <Label layoutX="231.0" layoutY="278.0" text="Région" />
             <Label layoutX="148.0" layoutY="309.0" text="Ville" />
+            <Label fx:id="errorModifyData" alignment="CENTER" layoutX="19.0" layoutY="127.0" prefHeight="15.0" prefWidth="287.0" text="Une erreur est survenue, veuillez réessayer." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </center>

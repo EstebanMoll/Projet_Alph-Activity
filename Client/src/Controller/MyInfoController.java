@@ -70,17 +70,24 @@ public class MyInfoController {
          * Requete récupération des données à ajouter
          */
 
-        SpinnerValueFactory<Integer> listPoids = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,200,70);
+        String userData = AlphActivity.client.getUserData();
+        String[] tabUserData = userData.split(";");
+
+        this.textCountry.setText(tabUserData[0]);
+        this.textRegion.setText(tabUserData[1]);
+        this.textCity.setText(tabUserData[2]);
+
+        SpinnerValueFactory<Integer> listPoids = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,200,Integer.parseInt(tabUserData[3]));
         this.PoidsSpinner.setValueFactory(listPoids);
 
-        SpinnerValueFactory<Integer> listTaille = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,250,170);
+        SpinnerValueFactory<Integer> listTaille = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,250,Integer.parseInt(tabUserData[4]));
         this.TailleSpinner.setValueFactory(listTaille);
 
         this.SexeComboBox.getItems().addAll("Homme", "Femme", "Autre");
-        this.SexeComboBox.getSelectionModel().selectFirst();
+        this.SexeComboBox.setValue(tabUserData[5]);
 
         this.NiveauComboBox.getItems().addAll("Débutant", "Intermédiaire", "Confirmé", "Expert", "Alpha");
-        this.NiveauComboBox.getSelectionModel().selectFirst();
+        this.NiveauComboBox.setValue(tabUserData[6]);
     }
 
     private String hash256(PasswordField pf) throws NoSuchAlgorithmException

@@ -122,7 +122,7 @@ public class Client {
 
     /**
      * Récupération de tous les types d'activités
-     * @return String de toutes les activités séparées par des points virgules
+     * @return String de toutes les activités séparées par des points virgules. Exemple("Course à pied;Marche;Vélo;VTT;Aviron")
      */
     public String getActivities()
     {
@@ -169,5 +169,14 @@ public class Client {
     public boolean checkOldPwd(String oldPwdHash)
     {
         return true;
+    }
+
+    /**
+     * Récupération des inforamations de l'utilisateur
+     * @return String de toutes les informations séparées par des points virgules.Exemple("France;Marne;Reims;70;180;Homme;Débutant)
+     */
+    public String getUserData()
+    {
+        return "France;Marne;Reims;70;180;Homme;Débutant";
     }
 }
