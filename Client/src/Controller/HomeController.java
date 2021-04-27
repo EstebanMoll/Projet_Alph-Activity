@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -27,6 +24,11 @@ public class HomeController {
     @FXML private Tab statTab;
     @FXML private Tab lastTrainingTab;
     @FXML private Tab rankTab;
+    @FXML private TabPane tabPane;
+    @FXML private Label loginUser;
+    @FXML private Label rankUser;
+    @FXML private Label imcUser;
+    @FXML private Label messageDisplay;
 
     public void addActivityButtonPushed(ActionEvent event) throws IOException
     {
@@ -73,10 +75,32 @@ public class HomeController {
         radio3.setToggleGroup(toggleGroup);
         radio4.setToggleGroup(toggleGroup);
 
+        toggleGroup.selectToggle(radio1);
+
+        loginUser.setText(AlphActivity.client.getLogin());
+        rankUser.setText("Rank : " + AlphActivity.client.getRank());
+        imcUser.setText("IMC : " + AlphActivity.client.getIMC());
+        messageDisplay.setText(AlphActivity.client.getMessage());
+
     }
 
-    public void radio1Pushed(ActionEvent event)
+    public void radio1Pushed()
     {
+        tabPane.getSelectionModel().select(historyTab);
+    }
 
+    public void radio2Pushed()
+    {
+        tabPane.getSelectionModel().select(statTab);
+    }
+
+    public void radio3Pushed()
+    {
+        tabPane.getSelectionModel().select(lastTrainingTab);
+    }
+
+    public void radio4Pushed()
+    {
+        tabPane.getSelectionModel().select(rankTab);
     }
 }

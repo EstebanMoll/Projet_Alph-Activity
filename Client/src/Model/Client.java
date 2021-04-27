@@ -179,4 +179,36 @@ public class Client {
     {
         return "France;Marne;Reims;70;180;Homme;Débutant";
     }
+
+    /**
+     * Récupération du login de l'utilisateur
+     * @return String login
+     */
+    public String getLogin() {
+        return "bidule02";
+    }
+
+    /**
+     * Récupération du classement de l'utilisateur (proportion par rapport à tous les autres sportif)
+     * @return String classement
+     */
+    public String getRank() {
+        return "24%";
+    }
+
+    /**
+     * Récupération de l'IMC de l'utilisateur
+     * @return String IMC
+     */
+    public String getIMC() {
+        return "25";
+    }
+
+    /**
+     * Récupération d'un message d'encouragement pour l'utilisateur
+     * @return String message
+     */
+    public String getMessage() {
+        return "Bon travail, continué sur votre lancé !!";
+    }
 }
