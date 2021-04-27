@@ -1,5 +1,6 @@
 package Controller;
 
+import App.AlphActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,12 +34,13 @@ public class AddActivityController {
         SpinnerValueFactory<Integer> listSeconde = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,59,0);
         this.SecondeSpinner.setValueFactory(listSeconde);
 
-        /**
-         * Modifier cette partie quand la bd sera fini
-         * Mettre les valeurs de la table Type Activité
-         */
-        this.ActivityComboBox.getItems().addAll("Course à pied", "Marche", "Vélo", "VTT", "Aviron");
+        String activities = AlphActivity.client.getActivities();
+        String[] tabActivities = activities.split(";");
 
+        for (String act: tabActivities)
+        {
+            this.ActivityComboBox.getItems().add(act);
+        }
     }
 
     public void addButtonPushed(ActionEvent event)

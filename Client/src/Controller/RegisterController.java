@@ -44,6 +44,7 @@ public class RegisterController {
             else
             {
                 errorCreateAccount.setVisible(true);
+                AlphActivity.client.disconnect();
             }
         }
         else

@@ -115,4 +115,13 @@ public class Client {
     {
         return true;
     }
+
+    /**
+     * Récupération de tous les types d'activités
+     * @return String de toutes les activités séparées par des points virgules
+     */
+    public String getActivities()
+    {
+        return "Course à pied;Marche;Vélo;VTT;Aviron";
+    }
 }
