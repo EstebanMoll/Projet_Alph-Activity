@@ -94,6 +94,15 @@ public class HomeController {
 
         rankChart.setTitle("Classement global");
         rankChart.getData().add(serie);
+
+        int i = 0;
+
+        for(Node n:rankChart.lookupAll(".default-color0.chart-bar")) {
+            if(i == AlphActivity.client.getClassement()) {
+                n.setStyle("-fx-bar-fill: #89C444;");
+            }
+            i++;
+        }
     }
 
     public void radio1Pushed()

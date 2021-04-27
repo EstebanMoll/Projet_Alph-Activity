@@ -211,4 +211,13 @@ public class Client {
     public String getMessage() {
         return "Bon travail, continué sur votre lancé !!";
     }
+
+    /**
+     * Récupération de la tranche dans laquelle se trouve l'utilisateur (entre 0,19, 0 -> 5%, 19 -> 100%)
+     * @return int classment
+     */
+    public int getClassement()
+    {
+        return 2;
+    }
 }
