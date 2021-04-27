@@ -65,12 +65,12 @@
             <Label layoutX="63.0" layoutY="399.0" text="Sexe" />
             <ComboBox fx:id="NiveauComboBox" layoutX="191.0" layoutY="417.0" prefHeight="26.0" prefWidth="107.0" promptText="Niveau" />
             <Label layoutX="233.0" layoutY="399.0" text="Niveau" />
-            <Label alignment="CENTER" layoutX="16.0" layoutY="165.0" prefHeight="40.0" prefWidth="287.0" text="Le mot de passe doit contenir 7 caractères dont une majuscule, une minuscule et un chiffre." textAlignment="CENTER" textFill="RED" wrapText="true">
+            <Label fx:id="errorPwd" alignment="CENTER" layoutX="16.0" layoutY="165.0" prefHeight="40.0" prefWidth="287.0" text="Le mot de passe doit contenir 7 caractères dont une majuscule, une minuscule et un chiffre." textAlignment="CENTER" textFill="RED" visible="false" wrapText="true">
                <font>
                   <Font size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="16.0" layoutY="237.0" prefHeight="19.0" prefWidth="287.0" text="Les mots de passes sont différents." textFill="RED">
+            <Label fx:id="errorConfirmPwd" alignment="CENTER" layoutX="16.0" layoutY="237.0" prefHeight="19.0" prefWidth="287.0" text="Les mots de passes sont différents." textFill="RED" visible="false">
                <font>
                   <Font size="13.0" />
                </font>
