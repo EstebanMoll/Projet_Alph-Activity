@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -15,7 +17,6 @@ import java.io.IOException;
 
 public class HomeController {
 
-    @FXML private Button addActivity;
     @FXML private RadioButton radio1;
     @FXML private RadioButton radio2;
     @FXML private RadioButton radio3;
@@ -29,6 +30,7 @@ public class HomeController {
     @FXML private Label rankUser;
     @FXML private Label imcUser;
     @FXML private Label messageDisplay;
+    @FXML private BarChart rankChart;
 
     public void addActivityButtonPushed(ActionEvent event) throws IOException
     {
@@ -82,6 +84,16 @@ public class HomeController {
         imcUser.setText("IMC : " + AlphActivity.client.getIMC());
         messageDisplay.setText(AlphActivity.client.getMessage());
 
+        XYChart.Series serie = new XYChart.Series();
+
+        for(int i = 0; i < 20; i++)
+        {
+            String value = (i + 1) * 5 + "%";
+            serie.getData().add(new XYChart.Data(value, 100-(i*5)));
+        }
+
+        rankChart.setTitle("Classement global");
+        rankChart.getData().add(serie);
     }
 
     public void radio1Pushed()

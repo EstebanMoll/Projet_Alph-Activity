@@ -6,5 +6,8 @@
 }
 .anchorbg {
     -fx-background-image: url("../ressources/bientot-disponible.png");
-    -fx-background-size: 100% 100%
+    -fx-background-size: 100% 100%;
+}
+.chart-bar {
+    -fx-bar-fill: #C6E437;
 }

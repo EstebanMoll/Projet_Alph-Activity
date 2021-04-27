@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -48,17 +51,20 @@
                         <Image url="@../ressources/userIcon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="86.0" layoutY="35.0" prefHeight="18.0" prefWidth="80.0" text="Username" underline="true" />
-                  <Label layoutX="86.0" layoutY="61.0" prefHeight="18.0" prefWidth="80.0" text="Rank : " />
-                  <Label layoutX="86.0" layoutY="87.0" prefHeight="18.0" prefWidth="80.0" text="IMC :" />
-                  <Label alignment="TOP_LEFT" layoutX="15.0" layoutY="141.0" prefHeight="65.0" prefWidth="155.0" text="Message blablablabla" />
+                  <Label fx:id="loginUser" layoutX="86.0" layoutY="35.0" prefHeight="18.0" prefWidth="80.0" text="Username" underline="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="rankUser" layoutX="86.0" layoutY="61.0" prefHeight="18.0" prefWidth="80.0" text="Rank : " />
+                  <Label fx:id="imcUser" layoutX="86.0" layoutY="87.0" prefHeight="18.0" prefWidth="80.0" text="IMC :" />
+                  <Label fx:id="messageDisplay" alignment="TOP_LEFT" layoutX="15.0" layoutY="141.0" prefHeight="65.0" prefWidth="155.0" text="Message blablablabla" wrapText="true" />
                   <Hyperlink layoutX="17.0" layoutY="109.0" onAction="#myInfoHyperlinkPushed" text="Mes infos" />
                   <Button alignment="CENTER" layoutX="33.0" layoutY="206.0" mnemonicParsing="false" onAction="#logoutButtonPushed" text="Déconnexion" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="150.0" prefWidth="150.0" GridPane.columnIndex="1">
                <children>
-                  <TabPane layoutX="86.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray; -fx-border-radius: 10;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="45.0">
+                  <TabPane fx:id="tabPane" layoutX="86.0" layoutY="26.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray; -fx-border-radius: 10;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="45.0">
                     <tabs>
                       <Tab fx:id="historyTab" text="Historique">
                         <content>
@@ -77,17 +83,27 @@
                         </Tab>
                         <Tab fx:id="rankTab" text="Classement">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <BarChart fx:id="rankChart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" tickMarkVisible="false" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" tickLabelsVisible="false" />
+                                      </yAxis>
+                                    </BarChart>
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                     </tabs>
                   </TabPane>
                   <HBox alignment="CENTER" layoutX="100.0" layoutY="206.0" prefHeight="19.0" prefWidth="200.0" spacing="50.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0">
                      <children>
-                        <RadioButton fx:id="radio1" mnemonicParsing="false" />
-                        <RadioButton fx:id="radio2" mnemonicParsing="false" />
-                        <RadioButton fx:id="radio3" mnemonicParsing="false" />
-                        <RadioButton fx:id="radio4" layoutX="42.0" layoutY="10.0" mnemonicParsing="false" />
+                        <RadioButton fx:id="radio1" mnemonicParsing="false" onAction="#radio1Pushed" />
+                        <RadioButton fx:id="radio2" mnemonicParsing="false" onAction="#radio2Pushed" />
+                        <RadioButton fx:id="radio3" mnemonicParsing="false" onAction="#radio3Pushed" />
+                        <RadioButton fx:id="radio4" layoutX="42.0" layoutY="10.0" mnemonicParsing="false" onAction="#radio4Pushed" />
                      </children>
                   </HBox>
                </children></AnchorPane>
