@@ -1,5 +1,6 @@
 package Controller;
 
+import App.AlphActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class HomeController {
         Scene activityScene = new Scene(activityParent);
 
         Stage window = new Stage();
+        window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
 
         window.setScene(activityScene);
         window.show();
@@ -43,6 +46,7 @@ public class HomeController {
         Scene myInfoScene = new Scene(myInfoParent);
 
         Stage window = new Stage();
+        window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
 
         window.setScene(myInfoScene);
         window.show();
