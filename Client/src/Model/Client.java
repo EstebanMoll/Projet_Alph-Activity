@@ -1,5 +1,9 @@
 package Model
 ;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextArea;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -123,5 +127,20 @@ public class Client {
     public String getActivities()
     {
         return "Course à pied;Marche;Vélo;VTT;Aviron";
+    }
+
+    /**
+     * Ajout d'une activité dans la base de données
+     * @param activityComboBox String activité
+     * @param distanceSpinner Float distance
+     * @param heureSpinner int Heure
+     * @param minuteSpinner int Minute
+     * @param secondeSpinner int Seconde
+     * @param textComment String commentaire
+     * @return true si ajout OK sinon false
+     */
+    public Boolean addActivity(String activityComboBox, double distanceSpinner, int heureSpinner, int minuteSpinner, int secondeSpinner, String textComment)
+    {
+        return true;
     }
 }

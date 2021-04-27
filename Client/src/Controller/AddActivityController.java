@@ -3,10 +3,7 @@ package Controller;
 import App.AlphActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AddActivityController {
@@ -16,8 +13,10 @@ public class AddActivityController {
     @FXML private Spinner HeureSpinner;
     @FXML private Spinner MinuteSpinner;
     @FXML private Spinner SecondeSpinner;
+    @FXML private TextArea textComment;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
+    @FXML private Label errorAddActivity;
 
     @FXML
     public void initialize()
@@ -41,19 +40,23 @@ public class AddActivityController {
         {
             this.ActivityComboBox.getItems().add(act);
         }
+
+        this.ActivityComboBox.getSelectionModel().selectFirst();
     }
 
     public void addButtonPushed(ActionEvent event)
     {
-        /**
-         * Ajouter l'envoi des données au serveur
-         */
-
-        closeWindow(addButton);
-
+        if(AlphActivity.client.addActivity(ActivityComboBox.getItems().toString(), (double)DistanceSpinner.getValue(), (int)HeureSpinner.getValue(), (int)MinuteSpinner.getValue(), (int)SecondeSpinner.getValue(), textComment.getText()))
+        {
+            closeWindow(addButton);
+        }
+        else
+        {
+            errorAddActivity.setVisible(true);
+        }
     }
 
-    public void cancelButtonPushed(ActionEvent event)
+    public void cancelButtonPushed()
     {
         closeWindow(cancelButton);
     }
@@ -61,7 +64,6 @@ public class AddActivityController {
     private void closeWindow(Button bt)
     {
         Stage stage = (Stage) bt.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 
