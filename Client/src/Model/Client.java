@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 import java.util.Scanner;
 /*
  * www.codeurjava.com
@@ -219,5 +220,24 @@ public class Client {
     public int getClassement()
     {
         return 2;
+    }
+
+    /**
+     * Récupération de l'historique de l'utilisateur (10 dernières activités)
+     * @return Tableau de String 10x4 sous la forme (Activité, Date, Distance, Temps)
+     */
+    public String[][] getHistory() {
+        String [][] retour = new String[10][4];
+        Random r = new Random();
+        String alphabet = "azertyuiopqsdfghjklmwxcvbn";
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+                retour[i][j] = String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
+            }
+        }
+
+        return retour;
     }
 }

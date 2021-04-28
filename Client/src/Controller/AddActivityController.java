@@ -3,8 +3,12 @@ package Controller;
 import App.AlphActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class AddActivityController {
 
@@ -44,10 +48,14 @@ public class AddActivityController {
         this.ActivityComboBox.getSelectionModel().selectFirst();
     }
 
-    public void addButtonPushed(ActionEvent event)
-    {
+    public void addButtonPushed(ActionEvent event) throws IOException {
         if(AlphActivity.client.addActivity(ActivityComboBox.getItems().toString(), (double)DistanceSpinner.getValue(), (int)HeureSpinner.getValue(), (int)MinuteSpinner.getValue(), (int)SecondeSpinner.getValue(), textComment.getText()))
         {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/home.fxml"));
+            Parent homeParent = (Parent)loader.load();
+            HomeController controller = loader.getController();
+            controller.updateHistoric();
+
             closeWindow(addButton);
         }
         else

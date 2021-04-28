@@ -11,11 +11,15 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HomeController {
+
+    private Node[][] gridPaneArray = null;
 
     @FXML private RadioButton radio1;
     @FXML private RadioButton radio2;
@@ -31,6 +35,7 @@ public class HomeController {
     @FXML private Label imcUser;
     @FXML private Label messageDisplay;
     @FXML private BarChart rankChart;
+    @FXML private GridPane gridHistoric;
 
     public void addActivityButtonPushed(ActionEvent event) throws IOException
     {
@@ -103,6 +108,10 @@ public class HomeController {
             }
             i++;
         }
+
+        initializeGridPaneArray();
+        updateHistoric();
+
     }
 
     public void radio1Pushed()
@@ -124,4 +133,40 @@ public class HomeController {
     {
         tabPane.getSelectionModel().select(rankTab);
     }
+
+    private void initializeGridPaneArray()
+    {
+        this.gridPaneArray = new Node[11][4];
+        for(Node node : this.gridHistoric.getChildren())
+        {
+            if(node instanceof AnchorPane) {
+                this.gridPaneArray[GridPane.getRowIndex(node)][GridPane.getColumnIndex(node)] = node;
+            }
+        }
+    }
+
+    public void updateHistoric() {
+
+        Node n;
+        String[][] historic = AlphActivity.client.getHistory();
+
+        for(int i = 1; i < 11; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+                n = this.gridPaneArray[i][j];
+                if(n instanceof AnchorPane)
+                {
+                    for(Node nodeIn: ((AnchorPane)n).getChildren())
+                    {
+                        if(nodeIn instanceof Label)
+                        {
+                            ((Label)nodeIn).setText(historic[i-1][j]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
