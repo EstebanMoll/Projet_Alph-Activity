@@ -2,17 +2,23 @@ package Controller;
 
 import App.AlphActivity;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +42,11 @@ public class HomeController {
     @FXML private Label messageDisplay;
     @FXML private BarChart rankChart;
     @FXML private GridPane gridHistoric;
+    @FXML private Label nbActivity;
+    @FXML private PieChart pieChart;
+    @FXML private BarChart distanceBarChart;
+    @FXML private BarChart tempsBarChart;
+    @FXML private BarChart vitesseBarChart;
 
     public void addActivityButtonPushed(ActionEvent event) throws IOException
     {
@@ -112,6 +123,41 @@ public class HomeController {
         initializeGridPaneArray();
         updateHistoric();
 
+        String[][] nbAct = AlphActivity.client.getNbActivity();
+
+        for(int j = 0; j < nbAct.length; j++)
+        {
+            pieChart.getData().add(new PieChart.Data(nbAct[j][0], Double.parseDouble(nbAct[j][1])));
+        }
+
+        pieChart.setLegendVisible(false);
+        pieChart.setLabelLineLength(10.0);
+
+        nbActivity.setText("En moyenne, vous pratiquez une activité " + AlphActivity.client.getMoyenneActivityPerWeek() + " fois par semaine.");
+
+        XYChart.Series<String, Number> distanceSerie = new XYChart.Series<String, Number>();
+        distanceSerie.setName("Distance");
+
+        XYChart.Series<String, Number> tempsSerie = new XYChart.Series<String, Number>();
+        distanceSerie.setName("Temps");
+
+        XYChart.Series<String, Number> vitesseSerie = new XYChart.Series<String, Number>();
+        distanceSerie.setName("Vitesse");
+
+        String[][] distance = AlphActivity.client.getMoyenneDistance();
+        String[][] temps = AlphActivity.client.getMoyenneTemps();
+        String[][] vitesse = AlphActivity.client.getMoyenneVitesse();
+
+        for(int j = 0; j < distance.length; j++)
+        {
+            distanceSerie.getData().add(new XYChart.Data<String, Number>(distance[j][0], Double.parseDouble(distance[j][1])));
+            tempsSerie.getData().add(new XYChart.Data<String, Number>(temps[j][0], Double.parseDouble(temps[j][1])));
+            vitesseSerie.getData().add(new XYChart.Data<String, Number>(vitesse[j][0], Double.parseDouble(vitesse[j][1])));
+        }
+
+        distanceBarChart.getData().add(distanceSerie);
+        tempsBarChart.getData().add(tempsSerie);
+        vitesseBarChart.getData().add(vitesseSerie);
     }
 
     public void radio1Pushed()

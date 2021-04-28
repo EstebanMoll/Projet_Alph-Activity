@@ -194,7 +194,7 @@ public class Client {
      * @return String classement
      */
     public String getRank() {
-        return "24%";
+        return "8%";
     }
 
     /**
@@ -237,6 +237,99 @@ public class Client {
                 retour[i][j] = String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
             }
         }
+
+        return retour;
+    }
+
+    /**
+     * Récupération du nombre de fois que 'litilisateur a fait une activité
+     * @return Tableau de String (Type d'activité, nobre de fois pratiqué)
+     */
+    public String[][] getNbActivity()
+    {
+        String[][]retour = new String[5][2];
+
+        retour[0][0] = "Course à pied";
+        retour[0][1] = "12";
+        retour[1][0] = "Marche";
+        retour[1][1] = "4";
+        retour[2][0] = "Vélo";
+        retour[2][1] = "1";
+        retour[3][0] = "VTT";
+        retour[3][1] = "8";
+        retour[4][0] = "Aviron";
+        retour[4][1] = "40";
+
+        return retour;
+    }
+
+    /**
+     * Récupération du nombre d'activité pratiquée par semaine en moyenne
+     * @return String nombre d'activité moyenne par semaine
+     */
+    public String getMoyenneActivityPerWeek() {
+        return "3";
+    }
+
+    /**
+     * Récupération des distance moyenne par activité
+     * @return Tableau de String (Activité, distance)
+     */
+    public String[][] getMoyenneDistance() {
+        String[][]retour = new String[5][2];
+
+        retour[0][0] = "Course à pied";
+        retour[0][1] = "12";
+        retour[1][0] = "Marche";
+        retour[1][1] = "4";
+        retour[2][0] = "Vélo";
+        retour[2][1] = "1";
+        retour[3][0] = "VTT";
+        retour[3][1] = "8";
+        retour[4][0] = "Aviron";
+        retour[4][1] = "40";
+
+        return retour;
+    }
+
+    /**
+     * Récupération des temps moyen par activité
+     * @return Tableau de String (Activité, temps en minute)
+     */
+    public String[][] getMoyenneTemps() {
+        String[][]retour = new String[5][2];
+
+        retour[0][0] = "Course à pied";
+        retour[0][1] = "128";
+        retour[1][0] = "Marche";
+        retour[1][1] = "35";
+        retour[2][0] = "Vélo";
+        retour[2][1] = "200";
+        retour[3][0] = "VTT";
+        retour[3][1] = "145";
+        retour[4][0] = "Aviron";
+        retour[4][1] = "55";
+
+        return retour;
+    }
+
+    /**
+     * Récupération des vitesses moyennes par activité
+     * @return Tableau de String (Activité, vitesse)
+     */
+    public String[][] getMoyenneVitesse() {
+        String[][]retour = new String[5][2];
+
+        retour[0][0] = "Course à pied";
+        retour[0][1] = "12";
+        retour[1][0] = "Marche";
+        retour[1][1] = "4";
+        retour[2][0] = "Vélo";
+        retour[2][1] = "1";
+        retour[3][0] = "VTT";
+        retour[3][1] = "8";
+        retour[4][0] = "Aviron";
+        retour[4][1] = "40";
 
         return retour;
     }
