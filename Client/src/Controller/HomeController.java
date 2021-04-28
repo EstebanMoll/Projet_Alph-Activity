@@ -72,8 +72,22 @@ public class HomeController {
         window.show();
     }
 
+    public void myStatsButtonPushed(ActionEvent event) throws IOException
+    {
+        Parent myStatsParent = FXMLLoader.load(getClass().getResource("../View/myStats.fxml"));
+        Scene myStatsScene = new Scene(myStatsParent);
+
+        Stage window = new Stage();
+        window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
+
+        window.setScene(myStatsScene);
+        window.show();
+    }
+
     public void logoutButtonPushed(ActionEvent event) throws IOException
     {
+        AlphActivity.client.disconnect();
+
         Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
         Scene loginScene = new Scene(loginParent);
 
@@ -135,13 +149,13 @@ public class HomeController {
 
         nbActivity.setText("En moyenne, vous pratiquez une activité " + AlphActivity.client.getMoyenneActivityPerWeek() + " fois par semaine.");
 
-        XYChart.Series<String, Number> distanceSerie = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> distanceSerie = new XYChart.Series<>();
         distanceSerie.setName("Distance");
 
-        XYChart.Series<String, Number> tempsSerie = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> tempsSerie = new XYChart.Series<>();
         distanceSerie.setName("Temps");
 
-        XYChart.Series<String, Number> vitesseSerie = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> vitesseSerie = new XYChart.Series<>();
         distanceSerie.setName("Vitesse");
 
         String[][] distance = AlphActivity.client.getMoyenneDistance();
@@ -150,9 +164,9 @@ public class HomeController {
 
         for(int j = 0; j < distance.length; j++)
         {
-            distanceSerie.getData().add(new XYChart.Data<String, Number>(distance[j][0], Double.parseDouble(distance[j][1])));
-            tempsSerie.getData().add(new XYChart.Data<String, Number>(temps[j][0], Double.parseDouble(temps[j][1])));
-            vitesseSerie.getData().add(new XYChart.Data<String, Number>(vitesse[j][0], Double.parseDouble(vitesse[j][1])));
+            distanceSerie.getData().add(new XYChart.Data<>(distance[j][0], Double.parseDouble(distance[j][1])));
+            tempsSerie.getData().add(new XYChart.Data<>(temps[j][0], Double.parseDouble(temps[j][1])));
+            vitesseSerie.getData().add(new XYChart.Data<>(vitesse[j][0], Double.parseDouble(vitesse[j][1])));
         }
 
         distanceBarChart.getData().add(distanceSerie);
