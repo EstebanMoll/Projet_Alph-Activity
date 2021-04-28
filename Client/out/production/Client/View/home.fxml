@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
@@ -68,7 +69,256 @@
                     <tabs>
                       <Tab fx:id="historyTab" text="Historique">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <content>
+                                          <GridPane fx:id="gridHistoric" gridLinesVisible="true" prefHeight="491.0" prefWidth="293.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints percentWidth="25.0" />
+                                                <ColumnConstraints percentWidth="25.0" />
+                                                <ColumnConstraints percentWidth="25.0" />
+                                                <ColumnConstraints percentWidth="25.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                   <children>
+                                                      <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" text="Activité" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" text="Date" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" text="Distance" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" text="Temps" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                    </children>
+                                                </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="9">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                                     <children>
+                                                         <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.599999999999994" AnchorPane.topAnchor="14.0" />
+                                                     </children>
+                                                 </AnchorPane>
+                                             </children>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                       <Tab fx:id="statTab" text="Statistiques">

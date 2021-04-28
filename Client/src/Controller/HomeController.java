@@ -104,7 +104,7 @@ public class HomeController {
 
         for(Node n:rankChart.lookupAll(".default-color0.chart-bar")) {
             if(i == AlphActivity.client.getClassement()) {
-                n.setStyle("-fx-bar-fill: #89C444;");
+                n.setStyle("-fx-bar-fill: #F69321;");
             }
             i++;
         }
