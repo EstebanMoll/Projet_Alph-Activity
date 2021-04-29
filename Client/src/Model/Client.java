@@ -7,10 +7,7 @@ import javafx.scene.control.TextArea;
 import java.io.*;
 import java.net.Socket;
 import java.util.Random;
-import java.util.Scanner;
-/*
- * www.codeurjava.com
- */
+
 public class Client {
 
     static final String serverName = "localhost";
@@ -20,8 +17,6 @@ public class Client {
     public static void main(String[] args) throws Exception {
 
         AppelServeur();
-
-
     }
 
     public static void AppelServeur() throws Exception {

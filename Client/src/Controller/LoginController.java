@@ -25,7 +25,6 @@ public class LoginController {
     @FXML private PasswordField pwdField;
     @FXML private Label labelEmpty;
     @FXML private Label errorLogin;
-    @FXML private Label networkError;
 
     public void registerHyperlinkPushed(ActionEvent event) throws IOException
     {
@@ -47,8 +46,6 @@ public class LoginController {
         else {
             String pwdHash = hash256(pwdField);
 
-            if (AlphActivity.client.connect()) {
-                networkError.setVisible(false);
                 if (AlphActivity.client.login(usernameTextField.getText(), pwdHash)) {
                     Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
                     Scene homeScene = new Scene(homeParent);
@@ -66,11 +63,8 @@ public class LoginController {
                     errorLogin.setVisible(true);
                 }
             }
-            else {
-                networkError.setVisible(true);
-            }
         }
-    }
+
 
 
     private boolean isEmpty(TextField tf)
