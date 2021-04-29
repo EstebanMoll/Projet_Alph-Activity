@@ -16,6 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,7 +87,9 @@ public class RegisterController {
                 }
 
 
-                if (AlphActivity.client.createAccount(usernameTextField.getText(), pwdHash, textCountry.getText(), textRegion.getText(), textCity.getText(), (int) PoidsSpinner.getValue(), birthdate.getValue().toString(), (int) TailleSpinner.getValue(), sexe, niveau)) {
+                String age = "" + Period.between(birthdate.getValue(), LocalDate.now()).getYears();
+
+                if (AlphActivity.client.createAccount(usernameTextField.getText(), pwdHash, textCountry.getText(), textRegion.getText(), textCity.getText(), (int) PoidsSpinner.getValue(), age, (int) TailleSpinner.getValue(), sexe, niveau)) {
                     Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     Scene loginScene = new Scene(loginParent);
 
