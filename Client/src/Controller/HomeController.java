@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -47,6 +48,9 @@ public class HomeController {
     @FXML private BarChart distanceBarChart;
     @FXML private BarChart tempsBarChart;
     @FXML private BarChart vitesseBarChart;
+    @FXML private ScatterChart scatterChart;
+    @FXML private Label pracActivity;
+    @FXML private Label dayAgo;
 
     public void addActivityButtonPushed(ActionEvent event) throws IOException
     {
@@ -172,6 +176,27 @@ public class HomeController {
         distanceBarChart.getData().add(distanceSerie);
         tempsBarChart.getData().add(tempsSerie);
         vitesseBarChart.getData().add(vitesseSerie);
+
+        String lastACtivity = AlphActivity.client.getPracActivity();
+        pracActivity.setText("Activité pratiquée : " + lastACtivity);
+        dayAgo.setText("Il y a " + AlphActivity.client.getDayAgo() + " jours");
+
+        XYChart.Series seriesLastTraining = new XYChart.Series();
+        seriesLastTraining.setName("Dernier entrainement");
+        XYChart.Series series = new XYChart.Series();
+        series.setName("Anciens entrainements");
+
+        Double[][] lastTrainingRecap = AlphActivity.client.getLastActivityRecap(lastACtivity);
+        seriesLastTraining.getData().add(new XYChart.Data(lastTrainingRecap[0][0], lastTrainingRecap[0][1]));
+        System.out.println(lastTrainingRecap.length);
+        for(int j = 1; j < lastTrainingRecap.length; j++)
+        {
+            series.getData().add(new XYChart.Data(lastTrainingRecap[j][0], lastTrainingRecap[j][1]));
+        }
+
+        scatterChart.getData().addAll(series, seriesLastTraining);
+
+
     }
 
     public void radio1Pushed()

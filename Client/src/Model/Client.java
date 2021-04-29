@@ -333,4 +333,46 @@ public class Client {
 
         return retour;
     }
+
+    /**
+     * Récupération de la derniere activité pratiquée
+     * @return String derniere activité
+     */
+    public String getPracActivity() {
+        return "Course à pied";
+    }
+
+    /**
+     * Récupération du nombre de jour depuis la derniere activité
+     * @return String nombre de jours
+     */
+    public String getDayAgo() {
+        return "5";
+    }
+
+    /**
+     * Récupération des 6 dernieres sorties pour l'activité donnée
+     * @param lastACtivity String activité donnée
+     * @return Tableau de double (temps, distance).
+     */
+    public Double[][] getLastActivityRecap(String lastACtivity) {
+        Double[][]retour = new Double[7][2];
+
+        retour[0][0] = 2.1;
+        retour[0][1] = 20.0;
+        retour[1][0] = 10.0;
+        retour[1][1] = 1.2;
+        retour[2][0] = 5.2;
+        retour[2][1] = 35.0;
+        retour[3][0] = 6.1;
+        retour[3][1] = 25.4;
+        retour[4][0] = 9.1;
+        retour[4][1] = 6.55;
+        retour[5][0] = 18.5;
+        retour[5][1] = 2.33;
+        retour[6][0] = 12.6;
+        retour[6][1] = 1.12;
+
+        return retour;
+    }
 }
