@@ -48,7 +48,44 @@ public class RegisterController {
 
                 String pwdHash = hash256(enterPasswordField);
 
-                if (AlphActivity.client.createAccount(usernameTextField.getText(), pwdHash, textCountry.getText(), textRegion.getText(), textCity.getText(), (int) PoidsSpinner.getValue(), birthdate.getValue().toString(), (int) TailleSpinner.getValue(), SexeComboBox.getValue().toString(), NiveauComboBox.getValue().toString())) {
+                String sexe;
+
+                switch (SexeComboBox.getValue().toString()) {
+                    case "Homme":
+                        sexe = "1";
+                        break;
+                    case "Femme":
+                        sexe = "2";
+                        break;
+                    default:
+                        sexe = "0";
+                }
+
+                String niveau;
+
+                switch (NiveauComboBox.getValue().toString())
+                {
+                    case "Débutant":
+                        niveau = "1";
+                        break;
+                    case "Intermédiaire":
+                        niveau = "2";
+                        break;
+                    case "Confirmé":
+                        niveau = "3";
+                        break;
+                    case "Expert":
+                        niveau = "4";
+                        break;
+                    case "Alpha":
+                        niveau = "5";
+                        break;
+                    default:
+                        niveau = "0";
+                }
+
+
+                if (AlphActivity.client.createAccount(usernameTextField.getText(), pwdHash, textCountry.getText(), textRegion.getText(), textCity.getText(), (int) PoidsSpinner.getValue(), birthdate.getValue().toString(), (int) TailleSpinner.getValue(), sexe, niveau)) {
                     Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     Scene loginScene = new Scene(loginParent);
 
@@ -58,7 +95,6 @@ public class RegisterController {
                     window.show();
                 } else {
                     errorCreateAccount.setVisible(true);
-                    AlphActivity.client.disconnect();
                 }
             }
         }

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class AlphActivity extends Application {
 
-   // public static Client client = new Client();
+   public static Client client = new Client();
 
     @Override
     public void start(Stage primaryStage) throws Exception{

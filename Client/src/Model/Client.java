@@ -5,10 +5,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/main
 public class Client {
 
     static final String serverName = "localhost";
@@ -16,34 +12,6 @@ public class Client {
     static int count = 0;
     static boolean isConnected = false;
     static String log,mdp;
-
-    public static void main(String[] args) throws Exception {
-
-<<<<<<< HEAD
-        //   System.out.println("Client recoit: " + ""+AppelServeur(""));
-
-        //Test login FALSE
-        System.out.println("LOG1 Client recoit: " + ""+login("MarlonLeBG", "FauxMDP"));
-
-        //Test login TRUE
-        System.out.println("LOG2 Client recoit: " + ""+login("MarlonLeBG", "TroDURaTrouverWLH"));
-
-
-        //Test create false
-        System.out.println("REG1 Client recoit: " + ""+createAccount());
-
-
-/*
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-*/
-=======
-        AppelServeur();
->>>>>>> refs/remotes/origin/main
-    }
 
     public static Object AppelServeur(String root) throws Exception {
         Socket socket = new Socket(serverName, serverPort);
@@ -453,5 +421,41 @@ public class Client {
         retour[6][1] = 1.12;
 
         return retour;
+    }
+
+    /**
+     * Récupération de toutes les activités de l'utilisateur
+     * @return Tableau de String (Activité, date, id)
+     */
+    public String[][] getAllActivities() {
+        String[][]retour = new String[5][3];
+
+        retour[0][0] = "Course à pied";
+        retour[0][1] = "28/04/2021";
+        retour[0][2] = "12";
+        retour[1][0] = "Marche";
+        retour[1][1] = "21/04/2021";
+        retour[1][2] = "11";
+        retour[2][0] = "Vélo";
+        retour[2][1] = "18/04/2021";
+        retour[2][2] = "10";
+        retour[3][0] = "VTT";
+        retour[3][1] = "11/04/2021";
+        retour[3][2] = "9";
+        retour[4][0] = "Aviron";
+        retour[4][1] = "01/04/2021";
+        retour[4][2] = "8";
+
+        return retour;
+    }
+
+    /**
+     * Récupération des données pour une activité en particulier
+     * @param id int id de l'activité
+     * @return String (type d'activité;distance;heure;minute;seconde;commentaire)
+     */
+    public String getActivityInfo(int id)
+    {
+        return "Course à pied;12;01;05;12;trop cool";
     }
 }

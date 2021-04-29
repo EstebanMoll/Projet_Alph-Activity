@@ -58,6 +58,7 @@ public class HomeController {
         Scene activityScene = new Scene(activityParent);
 
         Stage window = new Stage();
+        window.setResizable(false);
         window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
 
         window.setScene(activityScene);
@@ -70,6 +71,7 @@ public class HomeController {
         Scene myInfoScene = new Scene(myInfoParent);
 
         Stage window = new Stage();
+        window.setResizable(false);
         window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
 
         window.setScene(myInfoScene);
@@ -82,6 +84,7 @@ public class HomeController {
         Scene myStatsScene = new Scene(myStatsParent);
 
         Stage window = new Stage();
+        window.setResizable(false);
         window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
 
         window.setScene(myStatsScene);
@@ -90,8 +93,6 @@ public class HomeController {
 
     public void logoutButtonPushed(ActionEvent event) throws IOException
     {
-        AlphActivity.client.disconnect();
-
         Parent loginParent = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
         Scene loginScene = new Scene(loginParent);
 

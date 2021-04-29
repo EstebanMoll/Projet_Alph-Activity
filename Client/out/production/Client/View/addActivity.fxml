@@ -31,7 +31,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ActivityComboBox" layoutX="155.0" layoutY="112.0" prefWidth="150.0" promptText="Activité" />
+            <ComboBox fx:id="ActivityComboBox" layoutX="155.0" layoutY="112.0" prefWidth="150.0" promptText="Activité" stylesheets="@../Style/addActivity.css" />
             <Spinner fx:id="DistanceSpinner" editable="true" layoutX="155.0" layoutY="155.0" />
             <Label layoutX="8.0" layoutY="219.0" text="Temps">
                <font>
