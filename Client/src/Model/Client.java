@@ -4,10 +4,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,61 +13,43 @@ import java.util.Scanner;
  */
 public class Client {
 
-    public static void main(String[] args) {
+    static final String serverName = "localhost";
+    static final int serverPort = 9999;
+    static int count = 0;
 
-        final Socket clientSocket;
-        final BufferedReader in;
-        final PrintWriter out;
-        final Scanner sc = new Scanner(System.in);//pour lire à partir du clavier
+    public static void main(String[] args) throws Exception {
 
-        try {
-            /*
-             * les informations du serveur ( port et adresse IP ou nom d'hote
-             * 127.0.0.1 est l'adresse local de la machine
-             */
-            clientSocket = new Socket("127.0.0.1",5000);
+        AppelServeur();
 
-            //flux pour envoyer
-            out = new PrintWriter(clientSocket.getOutputStream());
-            //flux pour recevoir
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-            Thread envoyer = new Thread(new Runnable() {
-                String msg;
-                @Override
-                public void run() {
-                    while(true){
-                        msg = sc.nextLine();
-                        out.println(msg);
-                        out.flush();
-                    }
-                }
-            });
-            envoyer.start();
+    }
 
-            Thread recevoir = new Thread(new Runnable() {
-                String msg;
-                @Override
-                public void run() {
-                    try {
-                        msg = in.readLine();
-                        while(msg!=null){
-                            System.out.println("Serveur : "+msg);
-                            msg = in.readLine();
-                        }
-                        System.out.println("Serveur déconecté");
-                        out.close();
-                        clientSocket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            recevoir.start();
+    public static void AppelServeur() throws Exception {
+        Socket socket = new Socket(serverName, serverPort);
+        System.out.println("Socket client: " + socket);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        out.flush();
+
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+
+        System.out.println("Client a cree les flux");
+
+        String objetAEnvoyer = "TEST"+count++;
+
+        out.writeObject(objetAEnvoyer);
+        out.flush();
+
+        System.out.println("Client: donnees emises");
+
+        Object objetRecu = in.readObject();
+        String tableauRecu = ""+objetRecu;
+
+        System.out.println("Client recoit: " + tableauRecu);
+
+        in.close();
+        out.close();
+        socket.close();
     }
 
     /**

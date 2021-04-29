@@ -188,7 +188,7 @@ public class HomeController {
 
         Double[][] lastTrainingRecap = AlphActivity.client.getLastActivityRecap(lastACtivity);
         seriesLastTraining.getData().add(new XYChart.Data(lastTrainingRecap[0][0], lastTrainingRecap[0][1]));
-        System.out.println(lastTrainingRecap.length);
+
         for(int j = 1; j < lastTrainingRecap.length; j++)
         {
             series.getData().add(new XYChart.Data(lastTrainingRecap[j][0], lastTrainingRecap[j][1]));
