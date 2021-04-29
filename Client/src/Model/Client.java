@@ -1,30 +1,44 @@
-package Model
-;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
+package Model;
 
-import java.io.*;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
-import java.util.Scanner;
-/*
- * www.codeurjava.com
- */
+
+
 public class Client {
 
     static final String serverName = "localhost";
     static final int serverPort = 9999;
     static int count = 0;
+    static boolean isConnected = false;
+    static String log,mdp;
 
     public static void main(String[] args) throws Exception {
 
-        AppelServeur();
+        //   System.out.println("Client recoit: " + ""+AppelServeur(""));
+
+        //Test login FALSE
+        System.out.println("LOG1 Client recoit: " + ""+login("MarlonLeBG", "FauxMDP"));
+
+        //Test login TRUE
+        System.out.println("LOG2 Client recoit: " + ""+login("MarlonLeBG", "TroDURaTrouverWLH"));
 
 
+        //Test create false
+        System.out.println("REG1 Client recoit: " + ""+createAccount());
+
+
+/*
+        System.out.println("Client recoit: " + ""+AppelServeur(""));
+        System.out.println("Client recoit: " + ""+AppelServeur(""));
+        System.out.println("Client recoit: " + ""+AppelServeur(""));
+        System.out.println("Client recoit: " + ""+AppelServeur(""));
+        System.out.println("Client recoit: " + ""+AppelServeur(""));
+*/
     }
 
-    public static void AppelServeur() throws Exception {
+    public static Object AppelServeur(String root) throws Exception {
         Socket socket = new Socket(serverName, serverPort);
         System.out.println("Socket client: " + socket);
 
@@ -35,21 +49,17 @@ public class Client {
 
         System.out.println("Client a cree les flux");
 
-        String objetAEnvoyer = "TEST"+count++;
-
-        out.writeObject(objetAEnvoyer);
+        out.writeObject(root);
         out.flush();
+        Object rec = in.readObject();
 
         System.out.println("Client: donnees emises");
-
-        Object objetRecu = in.readObject();
-        String tableauRecu = ""+objetRecu;
-
-        System.out.println("Client recoit: " + tableauRecu);
 
         in.close();
         out.close();
         socket.close();
+        return(rec);
+
     }
 
     /**
@@ -58,27 +68,41 @@ public class Client {
      * @param psw String mot de passe hashé de l'utilisateur
      * @return true si login Ok sinon false
      */
-    public boolean login(String username, String psw)
+    public static boolean login(String username, String psw)
     {
-        return true;
+        String root = "get.login/"+username+"/"+psw ;
+
+        try {
+            if((Boolean) AppelServeur(root)){
+                isConnected = true;
+                log = username;
+                mdp = psw;
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+
     }
 
     /**
      * Connexion au serveur
      * @return true si connexion sinon false
      */
-    public boolean connect()
+    public static boolean connect()
     {
-        return true;
+        return isConnected;
     }
 
     /**
      * Deconnexion au serveur
      * @return true si la déconnexion OK sinon false
      */
-    public boolean disconnect()
+    public static boolean disconnect()
     {
-        return true;
+        isConnected = false;
+        return isConnected;
     }
 
     /**
@@ -95,18 +119,46 @@ public class Client {
      * @param level String niveau
      * @return true si création OK sinon false
      */
-    public boolean createAccount(String username, String pwd, String country, String region, String city, float weight, String birthdate, float size, String sexe, String level)
+    public static boolean createAccount(String username, String pwd, String country, String region, String city, float weight, String birthdate, float size, String sexe, String level)
     {
-        return true;
+        String root = "set.createAccount/"+username+"/"+pwd+"/"+country+"/"+region+"/"+city+"/"+weight+"/"+birthdate+"/"+size+"/"+sexe+"/"+level ;
+
+        try {
+            Boolean t = (Boolean) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean createAccount()
+    {
+        String root = "set.createAccount/teszdtLOG2/testMD2P/testPAYS/testREGION/testVI2LLE/1/2/3/4/5" ;
+        try {
+            Boolean t = (Boolean) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
      * Récupération de tous les types d'activités
      * @return String de toutes les activités séparées par des points virgules. Exemple("Course à pied;Marche;Vélo;VTT;Aviron")
      */
-    public String getActivities()
+    public static String getActivities()
     {
-        return "Course à pied;Marche;Vélo;VTT;Aviron";
+        String root = "get.listeActi/";
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+        //return "Course à pied;Marche;Vélo;VTT;Aviron";
     }
 
     /**
@@ -119,7 +171,7 @@ public class Client {
      * @param textComment String commentaire
      * @return true si ajout OK sinon false
      */
-    public Boolean addActivity(String activityComboBox, double distanceSpinner, int heureSpinner, int minuteSpinner, int secondeSpinner, String textComment)
+    public static Boolean addActivity(String activityComboBox, double distanceSpinner, int heureSpinner, int minuteSpinner, int secondeSpinner, String textComment)
     {
         return true;
     }
@@ -136,7 +188,7 @@ public class Client {
      * @param level String niveau
      * @return true si modification OK sinon false
      */
-    public boolean modifyData(String pwd, String country, String region, String city, int weight, int height, String sexe, String level)
+    public static boolean modifyData(String pwd, String country, String region, String city, int weight, int height, String sexe, String level)
     {
         return true;
     }
@@ -146,7 +198,7 @@ public class Client {
      * @param oldPwdHash ancien mot de passe hashé
      * @return true si comparaison OK sinon false
      */
-    public boolean checkOldPwd(String oldPwdHash)
+    public static boolean checkOldPwd(String oldPwdHash)
     {
         return true;
     }
@@ -155,57 +207,98 @@ public class Client {
      * Récupération des inforamations de l'utilisateur
      * @return String de toutes les informations séparées par des points virgules.Exemple("France;Marne;Reims;70;180;Homme;Débutant)
      */
-    public String getUserData()
+    public static String getUserData()
     {
-        return "France;Marne;Reims;70;180;Homme;Débutant";
+        String root = "get.userData/"+log+"/";
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+        //return "France;Marne;Reims;70;180;Homme;Débutant";
     }
 
     /**
      * Récupération du login de l'utilisateur
      * @return String login
      */
-    public String getLogin() {
-        return "bidule02";
+    public static String getLogin() {
+        return log;
     }
 
     /**
      * Récupération du classement de l'utilisateur (proportion par rapport à tous les autres sportif)
      * @return String classement
      */
-    public String getRank() {
-        return "8%";
+    public static String getRank() {
+        String root = "get.rank/"+log+"/";
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+        //return "8%";
     }
 
     /**
      * Récupération de l'IMC de l'utilisateur
      * @return String IMC
      */
-    public String getIMC() {
-        return "25";
+    public static String getIMC() {
+        String root = "get.imc/"+log+"/";
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+        //return "25";
     }
 
     /**
      * Récupération d'un message d'encouragement pour l'utilisateur
      * @return String message
      */
-    public String getMessage() {
-        return "Bon travail, continué sur votre lancé !!";
+    public static String getMessage() {
+        String root = "get.message/"+log+"/";
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+        //return "Bon travail, continué sur votre lancé !!";
     }
 
     /**
      * Récupération de la tranche dans laquelle se trouve l'utilisateur (entre 0,19, 0 -> 5%, 19 -> 100%)
      * @return int classment
      */
-    public int getClassement()
+    public static int getClassement()
     {
-        return 2;
+        String root = "get.classement/"+log+"/";
+        try {
+            int t = (Integer) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+
+        //return 2;
     }
 
     /**
      * Récupération de l'historique de l'utilisateur (10 dernières activités)
      * @return Tableau de String 10x4 sous la forme (Activité, Date, Distance, Temps)
      */
-    public String[][] getHistory() {
+    public static String[][] getHistory() {
         String [][] retour = new String[10][4];
         Random r = new Random();
         String alphabet = "azertyuiopqsdfghjklmwxcvbn";
@@ -224,7 +317,7 @@ public class Client {
      * Récupération du nombre de fois que 'litilisateur a fait une activité
      * @return Tableau de String (Type d'activité, nobre de fois pratiqué)
      */
-    public String[][] getNbActivity()
+    public static String[][] getNbActivity()
     {
         String[][]retour = new String[5][2];
 
@@ -246,7 +339,7 @@ public class Client {
      * Récupération du nombre d'activité pratiquée par semaine en moyenne
      * @return String nombre d'activité moyenne par semaine
      */
-    public String getMoyenneActivityPerWeek() {
+    public static String getMoyenneActivityPerWeek() {
         return "3";
     }
 
@@ -254,7 +347,7 @@ public class Client {
      * Récupération des distance moyenne par activité
      * @return Tableau de String (Activité, distance)
      */
-    public String[][] getMoyenneDistance() {
+    public static String[][] getMoyenneDistance() {
         String[][]retour = new String[5][2];
 
         retour[0][0] = "Course à pied";
@@ -275,7 +368,7 @@ public class Client {
      * Récupération des temps moyen par activité
      * @return Tableau de String (Activité, temps en minute)
      */
-    public String[][] getMoyenneTemps() {
+    public static String[][] getMoyenneTemps() {
         String[][]retour = new String[5][2];
 
         retour[0][0] = "Course à pied";
@@ -296,7 +389,7 @@ public class Client {
      * Récupération des vitesses moyennes par activité
      * @return Tableau de String (Activité, vitesse)
      */
-    public String[][] getMoyenneVitesse() {
+    public static String[][] getMoyenneVitesse() {
         String[][]retour = new String[5][2];
 
         retour[0][0] = "Course à pied";
@@ -317,7 +410,7 @@ public class Client {
      * Récupération de la derniere activité pratiquée
      * @return String derniere activité
      */
-    public String getPracActivity() {
+    public static String getPracActivity() {
         return "Course à pied";
     }
 
@@ -325,7 +418,7 @@ public class Client {
      * Récupération du nombre de jour depuis la derniere activité
      * @return String nombre de jours
      */
-    public String getDayAgo() {
+    public static String getDayAgo() {
         return "5";
     }
 
@@ -334,7 +427,7 @@ public class Client {
      * @param lastACtivity String activité donnée
      * @return Tableau de double (temps, distance).
      */
-    public Double[][] getLastActivityRecap(String lastACtivity) {
+    public static Double[][] getLastActivityRecap(String lastACtivity) {
         Double[][]retour = new Double[7][2];
 
         retour[0][0] = 2.1;
