@@ -5,7 +5,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
 public class Client {
 
     static final String serverName = "localhost";
@@ -16,6 +19,7 @@ public class Client {
 
     public static void main(String[] args) throws Exception {
 
+<<<<<<< HEAD
         //   System.out.println("Client recoit: " + ""+AppelServeur(""));
 
         //Test login FALSE
@@ -36,6 +40,9 @@ public class Client {
         System.out.println("Client recoit: " + ""+AppelServeur(""));
         System.out.println("Client recoit: " + ""+AppelServeur(""));
 */
+=======
+        AppelServeur();
+>>>>>>> refs/remotes/origin/main
     }
 
     public static Object AppelServeur(String root) throws Exception {

@@ -36,13 +36,15 @@ public class RegisterController {
     @FXML private Label errorCreateAccount;
     @FXML private Label errorPwd;
     @FXML private Label errorConfirmPwd;
+    @FXML private Label loginVoid;
 
     public void createAccountButtonPushed(ActionEvent event) throws IOException, NoSuchAlgorithmException {
         errorNetwork.setVisible(false);
         errorCreateAccount.setVisible(false);
+        loginVoid.setVisible(false);
 
-        if(checkPwd()) {
-            if (AlphActivity.client.connect()) {
+        if (!isEmpty(usernameTextField)) {
+            if (checkPwd()) {
 
                 String pwdHash = hash256(enterPasswordField);
 
@@ -58,11 +60,23 @@ public class RegisterController {
                     errorCreateAccount.setVisible(true);
                     AlphActivity.client.disconnect();
                 }
-            } else {
-                errorNetwork.setVisible(true);
             }
         }
+        else
+        {
+            loginVoid.setVisible(true);
+        }
     }
+
+    private boolean isEmpty(TextField tf)
+    {
+        if(tf.getText() == null || tf.getText().trim().isEmpty())
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     @FXML
     public void initialize()
