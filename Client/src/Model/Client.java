@@ -270,8 +270,11 @@ public class Client {
 
         if(ret.isEmpty())
             return 19;
-        else
-            return (int) (Float.parseFloat(getRank())/5);
+        else{
+            float rank = Float.parseFloat(getRank()) +1;
+            rank = (rank/5)-1;
+            return (int)  (rank<0 ? 0 : rank);
+        }
     }
 
     /**
