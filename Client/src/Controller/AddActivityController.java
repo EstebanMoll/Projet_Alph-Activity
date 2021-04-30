@@ -5,13 +5,16 @@ import Model.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class AddActivityController {
 
@@ -55,12 +58,17 @@ public class AddActivityController {
 
         if(Client.addActivity(ActivityComboBox.getValue().toString(), (double)DistanceSpinner.getValue(), (int)HeureSpinner.getValue(), (int)MinuteSpinner.getValue(), (int)SecondeSpinner.getValue(), textComment.getText()))
         {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/home.fxml"));
-            Parent homeParent = (Parent)loader.load();
-            HomeController controller = loader.getController();
-            controller.updateHistoric();
+            Parent homeParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../View/home.fxml")));
+            Scene homeScene = new Scene(homeParent);
+            homeScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../Style/home.css")).toString());
 
-            closeWindow(addButton);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setResizable(true);
+
+            window.setScene(homeScene);
+            window.setFullScreen(true);
+            window.show();
         }
         else
         {

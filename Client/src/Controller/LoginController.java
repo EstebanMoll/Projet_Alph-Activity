@@ -2,6 +2,7 @@ package Controller;
 
 import App.AlphActivity;
 
+import Model.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 public class LoginController {
 
@@ -46,10 +48,10 @@ public class LoginController {
         else {
             String pwdHash = hash256(pwdField);
 
-                if (AlphActivity.client.login(usernameTextField.getText(), pwdHash)) {
-                    Parent homeParent = FXMLLoader.load(getClass().getResource("../View/home.fxml"));
+                if (Client.login(usernameTextField.getText(), pwdHash)) {
+                    Parent homeParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../View/home.fxml")));
                     Scene homeScene = new Scene(homeParent);
-                    homeScene.getStylesheets().add(getClass().getResource("../Style/home.css").toString());
+                    homeScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../Style/home.css")).toString());
 
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

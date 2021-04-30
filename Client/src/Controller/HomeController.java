@@ -24,6 +24,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.Period;
+import java.util.Objects;
 
 public class HomeController {
 
@@ -58,7 +60,7 @@ public class HomeController {
         Parent activityParent = FXMLLoader.load(getClass().getResource("../View/addActivity.fxml"));
         Scene activityScene = new Scene(activityParent);
 
-        Stage window = new Stage();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setResizable(false);
         window.getIcons().add(new Image(HomeController.class.getResourceAsStream("/ressources/Logo.png")));
 
@@ -146,7 +148,7 @@ public class HomeController {
 
         String[][] nbAct = Client.getNbActivity();
 
-        for(int j = 0; j < nbAct.length; j++)
+        for(int j = 0; j < Objects.requireNonNull(nbAct).length; j++)
         {
             pieChart.getData().add(new PieChart.Data(nbAct[j][0], Double.parseDouble(nbAct[j][1])));
         }
@@ -169,17 +171,17 @@ public class HomeController {
         String[][] temps = Client.getMoyenneTemps();
         String[][] vitesse = Client.getMoyenneVitesse();
 
-        for(int j = 0; j < distance.length; j++)
+        for(int j = 0; j < Objects.requireNonNull(distance).length; j++)
         {
             distanceSerie.getData().add(new XYChart.Data<>(distance[j][0], Double.parseDouble(distance[j][1])));
         }
 
-        for(int j = 0; j < temps.length; j++)
+        for(int j = 0; j < Objects.requireNonNull(temps).length; j++)
         {
             tempsSerie.getData().add(new XYChart.Data<>(temps[j][0], Double.parseDouble(temps[j][1])));
         }
 
-        for(int j = 0; j < vitesse.length; j++)
+        for(int j = 0; j < Objects.requireNonNull(vitesse).length; j++)
         {
             vitesseSerie.getData().add(new XYChart.Data<>(vitesse[j][0], Double.parseDouble(vitesse[j][1])));
         }
@@ -261,8 +263,9 @@ public class HomeController {
                     {
                         if(nodeIn instanceof Label)
                         {
-                            if(historic[i-1] != null)
-                                ((Label)nodeIn).setText(historic[i-1][j]);
+                            if(historic[i-1] != null) {
+                                ((Label) nodeIn).setText(historic[i - 1][j]);
+                            }
                         }
                     }
                 }
