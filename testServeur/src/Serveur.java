@@ -652,7 +652,6 @@ public class Serveur {
                     if(i == 3){
                         int t = result.getInt(i);
                         int h,m;
-                        t = 8420;
 
                         h = (int) t/3600;
                         t = t-(h*3600);
@@ -661,7 +660,6 @@ public class Serveur {
                         t = t-(m*60);
 
                         txt+= h+";"+m+";"+t+";";
-                        System.out.println();
                     }
 
                     else{
