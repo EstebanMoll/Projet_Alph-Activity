@@ -320,7 +320,8 @@ public class Serveur {
         String req = "SELECT `type_activité`.nom\n" +
                 "    FROM `activité` as acti\n" +
                 "    INNER JOIN `type_activité` ON acti.id_Type = `type_activité`.id_Type\n" +
-                "    WHERE date_Activité=( SELECT MAX(date_Activité) FROM `activité` WHERE login=?) AND login=?";
+                "    WHERE date_Activité=( SELECT MAX(date_Activité) FROM `activité` WHERE login=?) AND login=?" +
+                "    LIMIT 1 ";
         ResultSet result = get_Donnees(req, donnees);
         String txt = "";
 
