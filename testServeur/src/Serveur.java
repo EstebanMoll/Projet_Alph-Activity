@@ -521,7 +521,7 @@ public class Serveur {
                         m = (int) t/60;
                         t = t-(m*60);
 
-                        txt[j][i - 1] = h+";"+m+";"+t+";";
+                        txt[j][i - 1] = h+":"+m+":"+t;
                     }
                     else{
                         txt[j][i - 1] = result.getString(i);
