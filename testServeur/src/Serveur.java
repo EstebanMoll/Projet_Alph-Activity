@@ -739,7 +739,7 @@ public class Serveur {
     private static String getMoyenneActivityPerWeek(String[] param){
         String[] donnees = {param[0],param[0]};
         String req = "SELECT ROUND(count(*)/(\n" +
-                "SELECT DATEDIFF(NOW(),MIN(date_Activité))/7\n" +
+                "SELECT IF(DATEDIFF(NOW(),MIN(date_Activité))<1,1,DATEDIFF(NOW(),MIN(date_Activité))/7)\n" +
                 "FROM `activité`\n" +
                 "WHERE login=?) , 2)\n" +
                 "FROM `activité`\n" +
