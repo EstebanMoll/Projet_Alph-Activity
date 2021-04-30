@@ -744,6 +744,9 @@ public class Serveur {
                 encore = result.next();
             }
             result.close();
+            System.out.println(txt);
+
+            //txt = ""+(Float.valueOf((txt)));
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
