@@ -20,39 +20,35 @@ public class Serveur {
      * Fonction principal qui tourne en boucle.
      * Elle appel les fonctions qui vont bien en
      * fonction de la demande
+     *
      * @throws Exception
      */
     public static void appelServ() throws Exception {
 
         System.out.println("Socket serveur: " + s);
         Socket soc = s.accept(); //bloquante en attendant l'acces
-        System.out.println("Serveur a accepte connexion: " + soc);
         ObjectOutputStream out = new ObjectOutputStream(soc.getOutputStream());
         out.flush();
         ObjectInputStream in = new ObjectInputStream(soc.getInputStream());
 
 
-        System.out.println("Serveur a cree les flux");
 
         Object objetRecu = in.readObject();
-        String root = ""+ objetRecu;
+        String root = "" + objetRecu;
 
 
-        String demande = root.substring(0,root.indexOf('/'));   //la demande
-        String param[] = root.substring(root.indexOf('/')+1).split(SEPARATEUR); //les parametres
+        String demande = root.substring(0, root.indexOf('/'));   //la demande
+        String param[] = root.substring(root.indexOf('/') + 1).split(SEPARATEUR); //les parametres
 
 
-        System.out.println("root :" + root);
-        System.out.println("demande :" + demande);
 
-        System.out.println("param :" );
         for (int i = 0; i < param.length; i++) {
-            System.out.print(param[i]+"/");
+            System.out.print(param[i] + "/");
         }
         Object retour;
 
 
-        switch(demande) {
+        switch (demande) {
             case "get.login":
                 retour = get_login(param);
                 break;
@@ -95,9 +91,12 @@ public class Serveur {
             case "get.LastActivityRecap":
                 retour = getLastActivityRecap(param);
                 break;
-
-
-
+            case "get.AllActivities":
+                retour = getAllActivities(param);
+                break;
+            case "get.ActivityInfo":
+                retour = getActivityInfo(param);
+                break;
 
             case "set.createAccount":
                 retour = set_createAccount(param);
@@ -115,7 +114,6 @@ public class Serveur {
 
         out.writeObject(retour);
         out.flush();
-        System.out.println("     return : "+retour);
 
         in.close();
         out.close();
@@ -126,24 +124,25 @@ public class Serveur {
 
 
     /*
-    *
-    * LES GETTERS
-    *
+     *
+     * LES GETTERS
+     *
      */
 
     /**
      * Fonction pour se connecter à l'application
      * String[] param username+psw
+     *
      * @return true si login Ok sinon false
      */
-    private static boolean get_login(String[] param){ //test une connexion, return bool
-        String[] donnees = {param[0],param[1]};
+    private static boolean get_login(String[] param) { //test une connexion, return bool
+        String[] donnees = {param[0], param[1]};
 
         String req = "SELECT count(*) FROM `utilisateur` WHERE `login` = ? AND`mdp`= ?";
-        ResultSet retour = get_Donnees(req,donnees);
+        ResultSet retour = get_Donnees(req, donnees);
         boolean result = false;
         try {
-            if(retour.next())
+            if (retour.next())
                 result = retour.getString(1).equals("1");
 
             retour.close();
@@ -155,12 +154,13 @@ public class Serveur {
 
     /**
      * Récupération de tous les types d'activités
+     *
      * @return String de toutes les activités séparées par des points virgules. Exemple("Course à pied;Marche;Vélo;VTT;Aviron")
      */
-    private static String getActivities(String[] param){
+    private static String getActivities(String[] param) {
         String[] donnees = {};
         String req = "SELECT nom FROM `type_activité`";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
         String txt = "";
 
         try {
@@ -170,7 +170,7 @@ public class Serveur {
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt+=(result.getString(i) + ";");
+                    txt += (result.getString(i) + ";");
                 encore = result.next();
             }
             result.close();
@@ -183,21 +183,22 @@ public class Serveur {
 
     /**
      * Récupération de l'IMC de l'utilisateur
+     *
      * @return String IMC
      */
-    private static String get_IMC(String[] param){
+    private static String get_IMC(String[] param) {
         String[] donnees = {param[0]};
         String req = "SELECT `poids`,`taille`\n" +
                 "FROM `utilisateur`\n" +
                 "WHERE login=?";
-        ResultSet result = get_Donnees(req,donnees);
-        int poid=0;
-        float taille=0;
+        ResultSet result = get_Donnees(req, donnees);
+        int poid = 0;
+        float taille = 0;
 
         try {
             result.next();
             poid = result.getInt(1);
-            taille = ((float) result.getInt(2))/100;
+            taille = ((float) result.getInt(2)) / 100;
 
             result.close();
         } catch (SQLException e) {
@@ -205,11 +206,12 @@ public class Serveur {
             //System.exit(99);
         }
 
-        return ""+poid/(taille*taille) ;
+        return "" + poid / (taille * taille);
     }
 
     /**
      * Récupération des inforamations de l'utilisateur
+     *
      * @return String de toutes les informations séparées par des points virgules.Exemple("France;Marne;Reims;70;180;Homme;Débutant)
      */
     public static String get_data(String[] param) {
@@ -218,7 +220,7 @@ public class Serveur {
                 "FROM `utilisateur` as utl\n" +
                 "INNER JOIN `adresse` as adr ON utl.`id_Adresse` = adr.`id_Adresse`\n" +
                 "WHERE login=?";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
         String txt = "";
 
 
@@ -228,8 +230,8 @@ public class Serveur {
             boolean encore = result.next();
 
             while (encore) {
-                for (int i = 1; i <= nbCols; i++){
-                    txt+=(result.getString(i) + ";");
+                for (int i = 1; i <= nbCols; i++) {
+                    txt += (result.getString(i) + ";");
                 }
                 encore = result.next();
             }
@@ -243,6 +245,7 @@ public class Serveur {
 
     /**
      * Récupération du classement de l'utilisateur (proportion par rapport à tous les autres sportif)
+     *
      * @return String classement
      */
     public static String get_rank(String[] param) {
@@ -251,7 +254,7 @@ public class Serveur {
                 "FROM `activité` \n" +
                 "HAVING SUM(`temps`) > (SELECT SUM(`temps`) FROM `activité` WHERE login=?)";
 
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
         String txt = "";
         try {
             ResultSetMetaData rsmd = result.getMetaData();
@@ -260,7 +263,7 @@ public class Serveur {
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt+=(result.getString(i));
+                    txt += (result.getString(i));
                 encore = result.next();
             }
             result.close();
@@ -273,12 +276,13 @@ public class Serveur {
 
     /**
      * Récupération du nombre de jour depuis la derniere activité
+     *
      * @return String nombre de jours
      */
-    private static String getDayAgo(String[] param){
+    private static String getDayAgo(String[] param) {
         String[] donnees = {param[0]};
         String req = "SELECT DATEDIFF(NOW(),(SELECT MAX(`date_Activité`) FROM `activité` WHERE login=?))";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
         String txt = "";
 
         try {
@@ -288,7 +292,7 @@ public class Serveur {
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt+=(result.getString(i));
+                    txt += (result.getString(i));
                 encore = result.next();
             }
             result.close();
@@ -301,15 +305,16 @@ public class Serveur {
 
     /**
      * Récupération de la derniere activité pratiquée
+     *
      * @return String derniere activité
      */
-    private static String getPracActivity(String[] param){
-        String[] donnees = {param[0],param[0]};
+    private static String getPracActivity(String[] param) {
+        String[] donnees = {param[0], param[0]};
         String req = "SELECT `type_activité`.nom\n" +
                 "    FROM `activité` as acti\n" +
                 "    INNER JOIN `type_activité` ON acti.id_Type = `type_activité`.id_Type\n" +
                 "    WHERE date_Activité=( SELECT MAX(date_Activité) FROM `activité` WHERE login=?) AND login=?";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
         String txt = "";
 
         try {
@@ -319,7 +324,7 @@ public class Serveur {
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt+=(result.getString(i));
+                    txt += (result.getString(i));
                 encore = result.next();
             }
             result.close();
@@ -331,15 +336,16 @@ public class Serveur {
 
     /**
      * Récupération du nombre de fois que 'litilisateur a fait une activité
+     *
      * @return Tableau de String (Type d'activité, nobre de fois pratiqué)
      */
-    private static int getNbacti(String[] param){
+    private static int getNbacti(String[] param) {
         String[] donnees = {param[0]};
         String req = "SELECT count(DISTINCT activité.id_Type)\n" +
                 "FROM `type_activité`\n" +
                 "INNER JOIN activité ON `type_activité`.`id_Type`=activité.id_Type\n" +
                 "WHERE activité.login=?";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
         int nb = 0;
 
         try {
@@ -355,21 +361,21 @@ public class Serveur {
     }
 
 
-
     /**
      * Récupération des distance moyenne par activité
+     *
      * @return Tableau de String (Activité, distance)
      */
-    private static String[][] getMoyenneDistance(String[] param){
+    private static String[][] getMoyenneDistance(String[] param) {
         String[] donnees = {param[0]};
-        String[][] txt ;
+        String[][] txt;
 
         String req = "SELECT nom, ROUND(AVG(activité.nb_Km),2)\n" +
                 "    FROM `type_activité`\n" +
                 "    INNER JOIN activité ON `type_activité`.`id_Type`=activité.id_Type\n" +
                 "    WHERE activité.login=?\n" +
                 "    GROUP BY activité.id_Type";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
 
         try {
 
@@ -380,9 +386,9 @@ public class Serveur {
 
             boolean encore = result.next();
 
-            for (int j = 1; j <= nblignes; j++){
+            for (int j = 1; j <= nblignes; j++) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt[j-1][i-1]=(result.getString(i));
+                    txt[j - 1][i - 1] = (result.getString(i));
                 result.next();
             }
             result.close();
@@ -396,18 +402,19 @@ public class Serveur {
 
     /**
      * Récupération des vitesses moyennes par activité
+     *
      * @return Tableau de String (Activité, vitesse)
      */
-    private static String[][] getMoyenneVitesse(String[] param){
+    private static String[][] getMoyenneVitesse(String[] param) {
         String[] donnees = {param[0]};
-        String[][] txt ;
+        String[][] txt;
 
         String req = "SELECT nom, ROUND(AVG(activité.nb_Km/(activité.temps/3600)),2)\n" +
                 "    FROM `type_activité`\n" +
                 "    INNER JOIN activité ON `type_activité`.`id_Type`=activité.id_Type\n" +
                 "    WHERE activité.login=?\n" +
                 "    GROUP BY activité.id_Type";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
 
         try {
 
@@ -418,9 +425,9 @@ public class Serveur {
 
             boolean encore = result.next();
 
-            for (int j = 1; j <= nblignes; j++){
+            for (int j = 1; j <= nblignes; j++) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt[j-1][i-1]=(result.getString(i));
+                    txt[j - 1][i - 1] = (result.getString(i));
                 result.next();
             }
             result.close();
@@ -434,18 +441,19 @@ public class Serveur {
 
     /**
      * Récupération des temps moyen par activité
+     *
      * @return Tableau de String (Activité, temps en minute)
      */
-    private static String[][] getMoyennetemps(String[] param){
+    private static String[][] getMoyennetemps(String[] param) {
         String[] donnees = {param[0]};
-        String[][] txt ;
+        String[][] txt;
 
         String req = "SELECT nom, ROUND(AVG(activité.temps/60),2)\n" +
                 "    FROM `type_activité`\n" +
                 "    INNER JOIN activité ON `type_activité`.`id_Type`=activité.id_Type\n" +
                 "    WHERE activité.login=?\n" +
                 "    GROUP BY activité.id_Type";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
 
         try {
 
@@ -456,9 +464,9 @@ public class Serveur {
 
             boolean encore = result.next();
 
-            for (int j = 1; j <= nblignes; j++){
+            for (int j = 1; j <= nblignes; j++) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt[j-1][i-1]=(result.getString(i));
+                    txt[j - 1][i - 1] = (result.getString(i));
                 result.next();
             }
             result.close();
@@ -472,9 +480,10 @@ public class Serveur {
 
     /**
      * Récupération de l'historique de l'utilisateur (10 dernières activités)
+     *
      * @return Tableau de String 10x4 sous la forme (Activité, Date, Distance, Temps)
      */
-    private static String[][] getHistory(String[] param){
+    private static String[][] getHistory(String[] param) {
         String[] donnees = {param[0]};
         String[][] txt = new String[10][4];
 
@@ -484,17 +493,17 @@ public class Serveur {
                 "WHERE activité.login=? \n" +
                 "ORDER BY `activité`.`date_Activité` DESC\n" +
                 "LIMIT 10";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
 
         try {
-            int j=0;
+            int j = 0;
             ResultSetMetaData rsmd = result.getMetaData();
             int nbCols = rsmd.getColumnCount();
             boolean encore = result.next();
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt[j][i-1] =result.getString(i);
+                    txt[j][i - 1] = result.getString(i);
                 encore = result.next();
                 j++;
             }
@@ -510,10 +519,11 @@ public class Serveur {
     /**
      * Récupération des 6 dernieres sorties pour l'activité donnée
      * param lastACtivity String activité donnée
+     *
      * @return Tableau de double (temps, distance).
      */
-    private static Double[][] getLastActivityRecap(String[] param){
-        String[] donnees = {param[0],param[1]};
+    private static Double[][] getLastActivityRecap(String[] param) {
+        String[] donnees = {param[0], param[1]};
         Double[][] txt = new Double[6][2];
 
         String req = "SELECT `nb_Km`,`temps`\n" +
@@ -522,17 +532,17 @@ public class Serveur {
                 "WHERE activité.login=? AND nom=?\n" +
                 "ORDER BY `activité`.`date_Activité` DESC\n" +
                 "LIMIT 6";
-        ResultSet result = get_Donnees(req,donnees);
+        ResultSet result = get_Donnees(req, donnees);
 
         try {
-            int j=0;
+            int j = 0;
             ResultSetMetaData rsmd = result.getMetaData();
             int nbCols = rsmd.getColumnCount();
             boolean encore = result.next();
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt[j][i-1] =result.getDouble(i);
+                    txt[j][i - 1] = result.getDouble(i);
                 encore = result.next();
                 j++;
             }
@@ -545,7 +555,101 @@ public class Serveur {
         return null;
     }
 
+    /**
+     * Permet de recup le total du nb d'acti d'un user donnée
+     *
+     * @param param : user
+     * @return : nb tot d'acti
+     */
+    private static int getNbActi(String[] param) {
 
+        String[] donnees = {param[0]};
+        String req = "SELECT COUNT(DISTINCT id_Activité) FROM `activité` WHERE login = ?";
+        ResultSet result = get_Donnees(req, donnees);
+        int tot = 0;
+
+        try {
+            result.next();
+            tot = result.getInt(1);
+            result.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return tot;
+    }
+
+
+    /**
+     * Récupération de toutes les activités de l'utilisateur
+     *
+     * @return Tableau de String (Activité, date, id)
+     */
+
+    private static String[][] getAllActivities(String[] param) {
+        String[] donnees = {param[0]};
+        String[][] txt = new String[getNbActi(param)][3];
+
+        String req = "SELECT nom,date_Activité,id_Activité\n" +
+                "FROM `activité`\n" +
+                "INNER JOIN type_activité ON `activité`.`id_Type`=type_activité.id_Type\n" +
+                "WHERE login = ?" +
+                "ORDER BY `activité`.`date_Activité` DESC";
+
+        ResultSet result = get_Donnees(req, donnees);
+
+        try {
+            int j = 0;
+            ResultSetMetaData rsmd = result.getMetaData();
+            int nbCols = rsmd.getColumnCount();
+            boolean encore = result.next();
+
+            while (encore) {
+                for (int i = 1; i <= nbCols; i++)
+                    txt[j][i - 1] = result.getString(i);
+                encore = result.next();
+                j++;
+            }
+            result.close();
+
+            return txt;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private static String getActivityInfo(String[] param) {
+
+        String[] donnees = {param[0],param[1]};
+        String req = "SELECT nom,nb_Km,temps,description\n" +
+                "    FROM `activité`\n" +
+                "    INNER JOIN type_activité ON `activité`.`id_Type`=type_activité.id_Type\n" +
+                "    WHERE login = ? AND id_Activité=?";
+        ResultSet result = get_Donnees(req, donnees);
+        String txt = "";
+
+
+        try
+        {
+            ResultSetMetaData rsmd = result.getMetaData();
+            int nbCols = rsmd.getColumnCount();
+            boolean encore = result.next();
+
+            while (encore) {
+                for (int i = 1; i <= nbCols; i++) {
+                    txt += (result.getString(i) + ";");
+                }
+                encore = result.next();
+            }
+            result.close();
+        } catch(
+        SQLException e)
+        {
+            System.err.println(e.getMessage());
+            //System.exit(99);
+        }
+        return txt;
+    }
 
 
     /**
@@ -626,7 +730,6 @@ public class Serveur {
      * @return un set de resultat formé au cas par cas
      */
     public static ResultSet get_Donnees(String req, String[] param) {
-        System.out.println(req);
         Connection con = null;
         ResultSet result = null;
 
@@ -782,7 +885,6 @@ public class Serveur {
      * @return un int en fonction de la situation
      */
     private static int set_Donnees(String req,String[] param) {
-        System.out.println(req);
         Connection con = null;
 
         // chargement du pilote
