@@ -3,12 +3,8 @@ package Model;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Random;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/main
 public class Client {
 
     static final String serverName = "localhost";
@@ -19,48 +15,82 @@ public class Client {
 
     public static void main(String[] args) throws Exception {
 
-<<<<<<< HEAD
-        //   System.out.println("Client recoit: " + ""+AppelServeur(""));
-
         //Test login FALSE
-        System.out.println("LOG1 Client recoit: " + ""+login("MarlonLeBG", "FauxMDP"));
+        System.out.println("LOG1 - false = "+login("MarlonLeBG", "FauxMDP"));
 
         //Test login TRUE
-        System.out.println("LOG2 Client recoit: " + ""+login("MarlonLeBG", "TroDURaTrouverWLH"));
+        System.out.println("LOG2 - true = "+login("MarlonLeBG", "TroDURaTrouverWLH"));
+        System.out.println("===================\n");
 
+        //Test create true
+        int rdm = (int) (Math.random()*100);
+        System.out.println("RDG1 - true = " +createAccount("LOG"+rdm,"testMD2P","testPAYS","testREGION","testVI2LLE",1,"18",3,"1","5"));
 
         //Test create false
-        System.out.println("REG1 Client recoit: " + ""+createAccount());
+        System.out.println("RDG2 - false = " +createAccount("test","testMD2P","testPAYS","testREGION","testVI2LLE",1,"18",3,"1","5"));
+        System.out.println("===================\n");
+
+        //Test get liste des activités acti
+        System.out.println("REG1 Client recoit: " + getActivities());
+        System.out.println("===================\n");
 
 
-/*
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-        System.out.println("Client recoit: " + ""+AppelServeur(""));
-*/
-=======
-        AppelServeur();
->>>>>>> refs/remotes/origin/main
+        System.out.println("LOG2 Client recoit: " + ""+login("MarlonLeBG", "TroDURaTrouverWLH"));
+
+        System.out.println("ACTI Client recoit: " + modifyData("TroDURaTrouverWLH","country","region","city", 50, 50, "1", "5"));
+
+        System.out.println("DATAGET Client recoit: " + getUserData());
+
+        System.out.println("GETIMC Client recoit: " + getIMC());
+
+        log = "Beau";
+        System.out.println("GETlastday Client recoit: " + getDayAgo());
+
+        System.out.println("GETlastday Client recoit: " + getPracActivity());
+
+        System.out.println("GETlastday Client recoit: " + getMoyenneDistance());
+
+        System.out.println("GETlastday Client recoit: " + getMoyenneTemps());
+
+        System.out.println("GETlastday Client recoit: " + getMoyenneVitesse());
+
+        System.out.println("GETlastday Client recoit: " + getRank());
+
+
+        System.out.println("GETlastday Client recoit: " + getClassement());
+
+
+        System.out.println("GETlastday Client recoit: " + getNbActivity());
+
+
+        System.out.println("GETlastday Client recoit: " + getMoyenneActivityPerWeek());
+
+
+        System.out.println("GETlastday Client recoit: " + getHistory());
+
+        System.out.println("GETlastday Client recoit: " + getLastActivityRecap("vélo"));
+
+        //System.out.println("GETlastday Client recoit: " + getLastActivityRecap("nage"));
+
+
+
+
     }
+
 
     public static Object AppelServeur(String root) throws Exception {
         Socket socket = new Socket(serverName, serverPort);
-        System.out.println("Socket client: " + socket);
 
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         out.flush();
 
         ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-        System.out.println("Client a cree les flux");
 
         out.writeObject(root);
         out.flush();
         Object rec = in.readObject();
 
-        System.out.println("Client: donnees emises");
 
         in.close();
         out.close();
@@ -109,6 +139,8 @@ public class Client {
     public static boolean disconnect()
     {
         isConnected = false;
+        log = "";
+        mdp = "";
         return isConnected;
     }
 
@@ -139,17 +171,6 @@ public class Client {
         return false;
     }
 
-    public static boolean createAccount()
-    {
-        String root = "set.createAccount/teszdtLOG2/testMD2P/testPAYS/testREGION/testVI2LLE/1/2/3/4/5" ;
-        try {
-            Boolean t = (Boolean) AppelServeur(root);
-            return t;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     /**
      * Récupération de tous les types d'activités
@@ -157,7 +178,7 @@ public class Client {
      */
     public static String getActivities()
     {
-        String root = "get.listeActi/";
+        String root = "get.Activities/";
         try {
             String t = (String) AppelServeur(root);
             return t;
@@ -180,8 +201,20 @@ public class Client {
      */
     public static Boolean addActivity(String activityComboBox, double distanceSpinner, int heureSpinner, int minuteSpinner, int secondeSpinner, String textComment)
     {
-        return true;
+        int duree = secondeSpinner + (minuteSpinner*60) + (heureSpinner*3600);
+        System.out.println(java.time.LocalDate.now());
+
+        String root = "set.addActivity/"+log+"/"+activityComboBox+"/"+distanceSpinner+"/"+duree+"/"+java.time.LocalDate.now()+"/"+textComment;
+
+        try {
+            Boolean t = (Boolean) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
+
 
     /**
      * Modification des données d'un utilisateur
@@ -197,7 +230,14 @@ public class Client {
      */
     public static boolean modifyData(String pwd, String country, String region, String city, int weight, int height, String sexe, String level)
     {
-        return true;
+        String root = "set.modifyData/"+log+"/"+pwd+"/"+weight+"/"+height+"/"+sexe+"/"+level+"/"+country +"/"+region +"/"+city;
+        try {
+            Boolean t = (Boolean) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -207,7 +247,7 @@ public class Client {
      */
     public static boolean checkOldPwd(String oldPwdHash)
     {
-        return true;
+        return mdp.equals(oldPwdHash);
     }
 
     /**
@@ -216,7 +256,7 @@ public class Client {
      */
     public static String getUserData()
     {
-        String root = "get.userData/"+log+"/";
+        String root = "get.userData/"+log;
         try {
             String t = (String) AppelServeur(root);
             return t;
@@ -240,7 +280,7 @@ public class Client {
      * @return String classement
      */
     public static String getRank() {
-        String root = "get.rank/"+log+"/";
+        String root = "get.rank/"+log;
         try {
             String t = (String) AppelServeur(root);
             return t;
@@ -256,7 +296,7 @@ public class Client {
      * @return String IMC
      */
     public static String getIMC() {
-        String root = "get.imc/"+log+"/";
+        String root = "get.IMC/"+log;
         try {
             String t = (String) AppelServeur(root);
             return t;
@@ -289,16 +329,7 @@ public class Client {
      */
     public static int getClassement()
     {
-        String root = "get.classement/"+log+"/";
-        try {
-            int t = (Integer) AppelServeur(root);
-            return t;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-
-        //return 2;
+        return (int) (Float.parseFloat(getRank())/5);
     }
 
     /**
@@ -306,18 +337,20 @@ public class Client {
      * @return Tableau de String 10x4 sous la forme (Activité, Date, Distance, Temps)
      */
     public static String[][] getHistory() {
-        String [][] retour = new String[10][4];
-        Random r = new Random();
-        String alphabet = "azertyuiopqsdfghjklmwxcvbn";
-        for(int i = 0; i < 10; i++)
-        {
-            for(int j = 0; j < 4; j++)
-            {
-                retour[i][j] = String.valueOf(alphabet.charAt(r.nextInt(alphabet.length())));
+        String root = "get.History/"+log;
+        try {
+            String[][] t = (String[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++) {
+                    System.out.print(t[i][j] + " - ");
+                }
+                System.out.println("");
             }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        return retour;
+        return null;
     }
 
     /**
@@ -326,20 +359,20 @@ public class Client {
      */
     public static String[][] getNbActivity()
     {
-        String[][]retour = new String[5][2];
-
-        retour[0][0] = "Course à pied";
-        retour[0][1] = "12";
-        retour[1][0] = "Marche";
-        retour[1][1] = "4";
-        retour[2][0] = "Vélo";
-        retour[2][1] = "1";
-        retour[3][0] = "VTT";
-        retour[3][1] = "8";
-        retour[4][0] = "Aviron";
-        retour[4][1] = "40";
-
-        return retour;
+        String root = "get.NbActivity/"+log;
+        try {
+            String[][] t = (String[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++) {
+                    System.out.print(t[i][j] + " - ");
+                }
+                System.out.println("");
+            }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -347,7 +380,14 @@ public class Client {
      * @return String nombre d'activité moyenne par semaine
      */
     public static String getMoyenneActivityPerWeek() {
-        return "3";
+        String root = "get.moyenneActivityPerWeek/"+log;
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
     }
 
     /**
@@ -355,20 +395,21 @@ public class Client {
      * @return Tableau de String (Activité, distance)
      */
     public static String[][] getMoyenneDistance() {
-        String[][]retour = new String[5][2];
+        String root = "get.MoyenneDistance/"+log;
+        try {
+            String[][] t = (String[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++) {
+                    System.out.print(t[i][j] + " - ");
+                }
+                System.out.println("");
+            }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
 
-        retour[0][0] = "Course à pied";
-        retour[0][1] = "12";
-        retour[1][0] = "Marche";
-        retour[1][1] = "4";
-        retour[2][0] = "Vélo";
-        retour[2][1] = "1";
-        retour[3][0] = "VTT";
-        retour[3][1] = "8";
-        retour[4][0] = "Aviron";
-        retour[4][1] = "40";
-
-        return retour;
     }
 
     /**
@@ -376,20 +417,21 @@ public class Client {
      * @return Tableau de String (Activité, temps en minute)
      */
     public static String[][] getMoyenneTemps() {
-        String[][]retour = new String[5][2];
+        String root = "get.MoyenneTemps/"+log;
+        try {
+            String[][] t = (String[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++) {
+                    System.out.print(t[i][j] + " - ");
+                }
+                System.out.println("");
+            }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
 
-        retour[0][0] = "Course à pied";
-        retour[0][1] = "128";
-        retour[1][0] = "Marche";
-        retour[1][1] = "35";
-        retour[2][0] = "Vélo";
-        retour[2][1] = "200";
-        retour[3][0] = "VTT";
-        retour[3][1] = "145";
-        retour[4][0] = "Aviron";
-        retour[4][1] = "55";
-
-        return retour;
     }
 
     /**
@@ -397,20 +439,20 @@ public class Client {
      * @return Tableau de String (Activité, vitesse)
      */
     public static String[][] getMoyenneVitesse() {
-        String[][]retour = new String[5][2];
-
-        retour[0][0] = "Course à pied";
-        retour[0][1] = "12";
-        retour[1][0] = "Marche";
-        retour[1][1] = "4";
-        retour[2][0] = "Vélo";
-        retour[2][1] = "1";
-        retour[3][0] = "VTT";
-        retour[3][1] = "8";
-        retour[4][0] = "Aviron";
-        retour[4][1] = "40";
-
-        return retour;
+        String root = "get.MoyenneVitesse/"+log;
+        try {
+            String[][] t = (String[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++) {
+                    System.out.print(t[i][j] + " - ");
+                }
+                System.out.println("");
+            }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -418,7 +460,15 @@ public class Client {
      * @return String derniere activité
      */
     public static String getPracActivity() {
-        return "Course à pied";
+        String root = "get.PracActivity/"+log;
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+        //return "Course à pied";
     }
 
     /**
@@ -426,7 +476,14 @@ public class Client {
      * @return String nombre de jours
      */
     public static String getDayAgo() {
-        return "5";
+        String root = "get.DayAgo/"+log;
+        try {
+            String t = (String) AppelServeur(root);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
     }
 
     /**
@@ -435,23 +492,19 @@ public class Client {
      * @return Tableau de double (temps, distance).
      */
     public static Double[][] getLastActivityRecap(String lastACtivity) {
-        Double[][]retour = new Double[7][2];
-
-        retour[0][0] = 2.1;
-        retour[0][1] = 20.0;
-        retour[1][0] = 10.0;
-        retour[1][1] = 1.2;
-        retour[2][0] = 5.2;
-        retour[2][1] = 35.0;
-        retour[3][0] = 6.1;
-        retour[3][1] = 25.4;
-        retour[4][0] = 9.1;
-        retour[4][1] = 6.55;
-        retour[5][0] = 18.5;
-        retour[5][1] = 2.33;
-        retour[6][0] = 12.6;
-        retour[6][1] = 1.12;
-
-        return retour;
+        String root = "get.LastActivityRecap/"+log+"/"+lastACtivity;
+        try {
+            Double[][] t = (Double[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++) {
+                    System.out.print(t[i][j] + " - ");
+                }
+                System.out.println("");
+            }
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

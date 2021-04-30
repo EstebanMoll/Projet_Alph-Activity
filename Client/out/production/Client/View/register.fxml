@@ -93,6 +93,11 @@
                   <Font size="13.0" />
                </font>
             </Label>
+            <Label fx:id="loginVoid" alignment="CENTER" layoutX="17.0" layoutY="118.0" prefHeight="19.0" prefWidth="287.0" text="L'identifiant est obligatoire." textFill="RED" visible="false">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </center>
