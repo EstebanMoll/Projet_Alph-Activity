@@ -511,7 +511,21 @@ public class Serveur {
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++)
-                    txt[j][i - 1] = result.getString(i);
+                    if(i == 4){
+                        int t = result.getInt(i);
+                        int h,m;
+
+                        h = (int) t/3600;
+                        t = t-(h*3600);
+
+                        m = (int) t/60;
+                        t = t-(m*60);
+
+                        txt[j][i - 1] = h+";"+m+";"+t+";";
+                    }
+                    else{
+                        txt[j][i - 1] = result.getString(i);
+                    }
                 encore = result.next();
                 j++;
             }
