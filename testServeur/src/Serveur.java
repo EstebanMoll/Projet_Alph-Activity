@@ -625,6 +625,11 @@ public class Serveur {
         return null;
     }
 
+    /**
+     * Récupération des données pour une activité en particulier
+     * param id int id de l'activité
+     * @return String (type d'activité;distance;heure;minute;seconde;commentaire)
+     */
     private static String getActivityInfo(String[] param) {
 
         String[] donnees = {param[0],param[1]};
@@ -644,7 +649,23 @@ public class Serveur {
 
             while (encore) {
                 for (int i = 1; i <= nbCols; i++) {
-                    txt += (result.getString(i) + ";");
+                    if(i == 3){
+                        int t = result.getInt(i);
+                        int h,m;
+                        t = 8420;
+
+                        h = (int) t/3600;
+                        t = t-(h*3600);
+
+                        m = (int) t/60;
+                        t = t-(m*60);
+
+                        txt+= t+";"+m+";"+t+";";
+                    }
+
+                    else{
+                        txt += (result.getString(i) + ";");
+                    }
                 }
                 encore = result.next();
             }
