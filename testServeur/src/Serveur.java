@@ -660,7 +660,8 @@ public class Serveur {
                         m = (int) t/60;
                         t = t-(m*60);
 
-                        txt+= t+";"+m+";"+t+";";
+                        txt+= h+";"+m+";"+t+";";
+                        System.out.println();
                     }
 
                     else{
