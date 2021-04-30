@@ -257,9 +257,14 @@ public class Serveur {
      */
     public static String get_rank(String[] param) {
         String[] donnees = {param[0]};
-        String req = "SELECT ROUND ((COUNT(DISTINCT login)*100)/(SELECT count(DISTINCT login)FROM `utilisateur`),2)\n" +
-                "FROM `activité` \n" +
-                "HAVING SUM(`temps`) > (SELECT SUM(`temps`) FROM `activité` WHERE login=?)";
+        String req = "SELECT ROUND( (COUNT(DISTINCT login)/(SELECT count(DISTINCT login)FROM `utilisateur`)) , 2)\n" +
+                "FROM activité\n" +
+                "WHERE login IN (\n" +
+                "    SELECT login\n" +
+                " FROM `activité` \n" +
+                " GROUP BY login\n" +
+                " HAVING SUM(temps)> (SELECT SUM(`temps`) FROM `activité` WHERE login=?)\n" +
+                ")";
 
         ResultSet result = get_Donnees(req, donnees);
         String txt = "";
