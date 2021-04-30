@@ -1,6 +1,7 @@
 package Controller;
 
 import App.AlphActivity;
+import Model.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -44,11 +45,47 @@ public class MyInfoController {
         errorModifyData.setVisible(false);
         errorOldPwd.setVisible(false);
 
-        if(AlphActivity.client.checkOldPwd(oldPwdHash)) {
+        if(Client.checkOldPwd(oldPwdHash)) {
             if (checkPwd()) {
                 String pwdhash = hash256(newPwd);
 
-                if (AlphActivity.client.modifyData(pwdhash, textCountry.getText(), textRegion.getText(), textCity.getText(), (int) PoidsSpinner.getValue(), (int) TailleSpinner.getValue(), SexeComboBox.getValue().toString(), NiveauComboBox.getValue().toString())) {
+                String sexe;
+
+                switch (SexeComboBox.getValue().toString()) {
+                    case "Homme":
+                        sexe = "1";
+                        break;
+                    case "Femme":
+                        sexe = "2";
+                        break;
+                    default:
+                        sexe = "0";
+                }
+
+                String niveau;
+
+                switch (NiveauComboBox.getValue().toString())
+                {
+                    case "Débutant":
+                        niveau = "1";
+                        break;
+                    case "Intermédiaire":
+                        niveau = "2";
+                        break;
+                    case "Confirmé":
+                        niveau = "3";
+                        break;
+                    case "Expert":
+                        niveau = "4";
+                        break;
+                    case "Alpha":
+                        niveau = "5";
+                        break;
+                    default:
+                        niveau = "0";
+                }
+
+                if (Client.modifyData(pwdhash, textCountry.getText(), textRegion.getText(), textCity.getText(), (int) PoidsSpinner.getValue(), (int) TailleSpinner.getValue(), sexe, niveau)) {
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                     window.close();
@@ -66,7 +103,7 @@ public class MyInfoController {
     @FXML
     public void initialize()
     {
-        String userData = AlphActivity.client.getUserData();
+        String userData = Client.getUserData();
         String[] tabUserData = userData.split(";");
 
         this.textCountry.setText(tabUserData[0]);
@@ -80,10 +117,47 @@ public class MyInfoController {
         this.TailleSpinner.setValueFactory(listTaille);
 
         this.SexeComboBox.getItems().addAll("Homme", "Femme", "Autre");
-        this.SexeComboBox.setValue(tabUserData[5]);
+
+        switch (tabUserData[5]){
+            case "0":
+                this.SexeComboBox.setValue("Autre");
+                break;
+            case "1":
+                this.SexeComboBox.setValue("Homme");
+                break;
+            case "2":
+                this.SexeComboBox.setValue("Femme");
+                break;
+            default:
+                this.SexeComboBox.setValue("erreur");
+                break;
+        }
+
 
         this.NiveauComboBox.getItems().addAll("Débutant", "Intermédiaire", "Confirmé", "Expert", "Alpha");
-        this.NiveauComboBox.setValue(tabUserData[6]);
+
+        switch (tabUserData[6])
+        {
+            case "1":
+                this.NiveauComboBox.setValue("Débutant");
+                break;
+            case "2":
+                this.NiveauComboBox.setValue("Intermédiaire");
+                break;
+            case "3":
+                this.NiveauComboBox.setValue("Confirmé");
+                break;
+            case "4":
+                this.NiveauComboBox.setValue("Expert");
+                break;
+            case"5":
+                this.NiveauComboBox.setValue("Alpha");
+                break;
+            default:
+                this.NiveauComboBox.setValue("erreur");
+                break;
+        }
+
     }
 
     private String hash256(PasswordField pf) throws NoSuchAlgorithmException

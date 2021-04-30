@@ -1,6 +1,7 @@
 package Controller;
 
 import App.AlphActivity;
+import Model.Client;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -114,10 +115,10 @@ public class HomeController {
 
         toggleGroup.selectToggle(radio1);
 
-        loginUser.setText(AlphActivity.client.getLogin());
-        rankUser.setText("Rank : " + AlphActivity.client.getRank());
-        imcUser.setText("IMC : " + AlphActivity.client.getIMC());
-        messageDisplay.setText(AlphActivity.client.getMessage());
+        loginUser.setText(Client.getLogin());
+        rankUser.setText("Rank : " + Client.getRank());
+        imcUser.setText("IMC : " + Client.getIMC());
+        messageDisplay.setText(Client.getMessage());
 
         XYChart.Series serie = new XYChart.Series();
 
@@ -131,9 +132,10 @@ public class HomeController {
         rankChart.getData().add(serie);
 
         int i = 0;
+        int recherche = Client.getClassement();
 
         for(Node n:rankChart.lookupAll(".default-color0.chart-bar")) {
-            if(i == AlphActivity.client.getClassement()) {
+            if(i == recherche) {
                 n.setStyle("-fx-bar-fill: #F69321;");
             }
             i++;
@@ -142,7 +144,7 @@ public class HomeController {
         initializeGridPaneArray();
         updateHistoric();
 
-        String[][] nbAct = AlphActivity.client.getNbActivity();
+        String[][] nbAct = Client.getNbActivity();
 
         for(int j = 0; j < nbAct.length; j++)
         {
@@ -152,7 +154,7 @@ public class HomeController {
         pieChart.setLegendVisible(false);
         pieChart.setLabelLineLength(10.0);
 
-        nbActivity.setText("En moyenne, vous pratiquez une activité " + AlphActivity.client.getMoyenneActivityPerWeek() + " fois par semaine.");
+        nbActivity.setText("En moyenne, vous pratiquez une activité " + Client.getMoyenneActivityPerWeek() + " fois par semaine.");
 
         XYChart.Series<String, Number> distanceSerie = new XYChart.Series<>();
         distanceSerie.setName("Distance");
@@ -163,14 +165,22 @@ public class HomeController {
         XYChart.Series<String, Number> vitesseSerie = new XYChart.Series<>();
         distanceSerie.setName("Vitesse");
 
-        String[][] distance = AlphActivity.client.getMoyenneDistance();
-        String[][] temps = AlphActivity.client.getMoyenneTemps();
-        String[][] vitesse = AlphActivity.client.getMoyenneVitesse();
+        String[][] distance = Client.getMoyenneDistance();
+        String[][] temps = Client.getMoyenneTemps();
+        String[][] vitesse = Client.getMoyenneVitesse();
 
         for(int j = 0; j < distance.length; j++)
         {
             distanceSerie.getData().add(new XYChart.Data<>(distance[j][0], Double.parseDouble(distance[j][1])));
+        }
+
+        for(int j = 0; j < temps.length; j++)
+        {
             tempsSerie.getData().add(new XYChart.Data<>(temps[j][0], Double.parseDouble(temps[j][1])));
+        }
+
+        for(int j = 0; j < vitesse.length; j++)
+        {
             vitesseSerie.getData().add(new XYChart.Data<>(vitesse[j][0], Double.parseDouble(vitesse[j][1])));
         }
 
@@ -178,21 +188,25 @@ public class HomeController {
         tempsBarChart.getData().add(tempsSerie);
         vitesseBarChart.getData().add(vitesseSerie);
 
-        String lastACtivity = AlphActivity.client.getPracActivity();
+        String lastACtivity = Client.getPracActivity();
         pracActivity.setText("Activité pratiquée : " + lastACtivity);
-        dayAgo.setText("Il y a " + AlphActivity.client.getDayAgo() + " jours");
+        dayAgo.setText("Il y a " + Client.getDayAgo() + " jours");
 
         XYChart.Series seriesLastTraining = new XYChart.Series();
         seriesLastTraining.setName("Dernier entrainement");
         XYChart.Series series = new XYChart.Series();
         series.setName("Anciens entrainements");
 
-        Double[][] lastTrainingRecap = AlphActivity.client.getLastActivityRecap(lastACtivity);
-        seriesLastTraining.getData().add(new XYChart.Data(lastTrainingRecap[0][0], lastTrainingRecap[0][1]));
+        if(!lastACtivity.isEmpty()) {
+            Double[][] lastTrainingRecap = Client.getLastActivityRecap(lastACtivity);
 
-        for(int j = 1; j < lastTrainingRecap.length; j++)
-        {
-            series.getData().add(new XYChart.Data(lastTrainingRecap[j][0], lastTrainingRecap[j][1]));
+            if (lastTrainingRecap != null) {
+                seriesLastTraining.getData().add(new XYChart.Data(lastTrainingRecap[0][0], lastTrainingRecap[0][1]));
+
+                for (int j = 1; j < lastTrainingRecap.length; j++) {
+                    series.getData().add(new XYChart.Data(lastTrainingRecap[j][0], lastTrainingRecap[j][1]));
+                }
+            }
         }
 
         scatterChart.getData().addAll(series, seriesLastTraining);
@@ -234,7 +248,7 @@ public class HomeController {
     public void updateHistoric() {
 
         Node n;
-        String[][] historic = AlphActivity.client.getHistory();
+        String[][] historic = Client.getHistory();
 
         for(int i = 1; i < 11; i++)
         {
@@ -247,7 +261,8 @@ public class HomeController {
                     {
                         if(nodeIn instanceof Label)
                         {
-                            ((Label)nodeIn).setText(historic[i-1][j]);
+                            if(historic[i-1] != null)
+                                ((Label)nodeIn).setText(historic[i-1][j]);
                         }
                     }
                 }

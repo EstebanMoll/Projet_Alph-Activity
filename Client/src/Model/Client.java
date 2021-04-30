@@ -266,7 +266,12 @@ public class Client {
      */
     public static int getClassement()
     {
-        return (int) (Float.parseFloat(getRank())/5);
+        String ret = getRank();
+
+        if(ret.isEmpty())
+            return 19;
+        else
+            return (int) (Float.parseFloat(getRank())/5);
     }
 
     /**

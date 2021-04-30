@@ -97,6 +97,9 @@ public class Serveur {
             case "get.ActivityInfo":
                 retour = getActivityInfo(param);
                 break;
+            case "get.message":
+                retour = getMessage(param);
+                break;
 
             case "set.createAccount":
                 retour = set_createAccount(param);
@@ -241,6 +244,10 @@ public class Serveur {
             //System.exit(99);
         }
         return txt;
+    }
+
+    public static String getMessage(String[] param){
+        return "Courage, vous êtes sur la bonne voie";
     }
 
     /**
@@ -828,6 +835,10 @@ public class Serveur {
      */
     private static boolean set_addActivity(String[] param){
         String[] donnees = {param[5],param[4],param[2],param[3],param[1],param[0]};
+        for(int i = 0; i < donnees.length; i++)
+        {
+            System.out.println(donnees[i]);
+        }
         int maj = 0;
         String req = "INSERT INTO `activité` (`description`,`date_Activité`,`nb_Km`,`temps`,`id_Type`,`login`)\n" +
                 "SELECT ?,?,?,?,\n" +

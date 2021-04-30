@@ -1,6 +1,7 @@
 package Controller;
 
 import App.AlphActivity;
+import Model.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class AddActivityController {
 
@@ -37,7 +40,7 @@ public class AddActivityController {
             SpinnerValueFactory<Integer> listSeconde = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0);
             this.SecondeSpinner.setValueFactory(listSeconde);
 
-            String activities = AlphActivity.client.getActivities();
+            String activities = Client.getActivities();
             String[] tabActivities = activities.split(";");
 
             for (String act : tabActivities) {
@@ -49,7 +52,8 @@ public class AddActivityController {
     }
 
     public void addButtonPushed(ActionEvent event) throws IOException {
-        if(AlphActivity.client.addActivity(ActivityComboBox.getItems().toString(), (double)DistanceSpinner.getValue(), (int)HeureSpinner.getValue(), (int)MinuteSpinner.getValue(), (int)SecondeSpinner.getValue(), textComment.getText()))
+
+        if(Client.addActivity(ActivityComboBox.getValue().toString(), (double)DistanceSpinner.getValue(), (int)HeureSpinner.getValue(), (int)MinuteSpinner.getValue(), (int)SecondeSpinner.getValue(), textComment.getText()))
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/home.fxml"));
             Parent homeParent = (Parent)loader.load();
