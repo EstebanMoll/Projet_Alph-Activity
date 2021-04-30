@@ -282,6 +282,10 @@ public class Client {
         String root = "get.History/"+log;
         try {
             String[][] t = (String[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++)
+                    if(t[i][j]==null) t[i][j]="";
+            }
             return t;
         } catch (Exception e) {
             e.printStackTrace();
@@ -407,6 +411,10 @@ public class Client {
         String root = "get.LastActivityRecap/"+log+"/"+lastACtivity;
         try {
             Double[][] t = (Double[][]) AppelServeur(root);
+            for(int i=0;i<t.length;i++){
+                for(int j=0;j<t[i].length;j++)
+                    if(t[i][j]==null) t[i][j]=0.00;
+            }
             return t;
         } catch (Exception e) {
             e.printStackTrace();
