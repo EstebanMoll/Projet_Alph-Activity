@@ -54,7 +54,7 @@
                         <Image url="@../ressources/userIcon.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="loginUser" layoutX="86.0" layoutY="35.0" prefHeight="18.0" prefWidth="80.0" text="Username" underline="true">
+                  <Label fx:id="loginUser" layoutX="85.0" layoutY="35.0" prefHeight="20.0" prefWidth="86.0" text="Username" underline="true" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font size="14.0" />
                      </font></Label>

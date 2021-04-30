@@ -59,7 +59,6 @@ public class LoginController {
                     window.setFullScreen(true);
                     window.show();
                 } else {
-                    AlphActivity.client.disconnect();
                     errorLogin.setVisible(true);
                 }
             }

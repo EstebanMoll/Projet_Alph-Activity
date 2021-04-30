@@ -66,10 +66,6 @@ public class MyInfoController {
     @FXML
     public void initialize()
     {
-        /**
-         * Requete récupération des données à ajouter
-         */
-
         String userData = AlphActivity.client.getUserData();
         String[] tabUserData = userData.split(";");
 
